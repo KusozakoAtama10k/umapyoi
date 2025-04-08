@@ -6,7 +6,9 @@ import net.minecraft.world.item.Item;
 import net.tracen.umapyoi.Umapyoi;
 
 public class UmapyoiItemTags {
-    public static final TagKey<Item> COMMON_GACHA_ITEM = TagUtils.modItemTag(Umapyoi.MODID, "common_gacha_item");
+    public static final TagKey<Item> SHOULD_RENDER = TagUtils.modItemTag(Umapyoi.MODID, "should_render");
+	
+	public static final TagKey<Item> COMMON_GACHA_ITEM = TagUtils.modItemTag(Umapyoi.MODID, "common_gacha_item");
     
     public static final TagKey<Item> HORSESHOE = TagUtils.modItemTag(Umapyoi.MODID, "horseshoe");
     
@@ -24,4 +26,8 @@ public class UmapyoiItemTags {
     
     public static final TagKey<Item> BREAD = TagUtils.forgeItemTag("bread");
     public static final TagKey<Item> BREAD_WHEAT = TagUtils.forgeItemTag("bread/wheat");
+    
+    public static final TagKey<Item> BAMBOO = TagUtils.forgeItemTag("bamboo");
+    
+    public static final TagKey<Item> VEGETABLES_CARROT = TagUtils.forgeItemTag("vegetables/carrot");
 }

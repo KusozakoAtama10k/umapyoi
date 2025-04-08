@@ -27,6 +27,10 @@ public class SkillOverlay implements IGuiOverlay {
     public void render(ForgeGui gui, GuiGraphics guiGraphics, float partialTick, int width, int height) {
         if (!UmapyoiConfig.OVERLAY_SWITCH.get())
             return;
+        
+        if(minecraft.options.hideGui)
+        	return;
+        
         int x = width / 2;
         int y = height;
 

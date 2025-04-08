@@ -109,7 +109,7 @@ public class TrainingFacilityBlockEntity extends SyncedBlockEntity implements Me
         for (int i = 1; i < 7; i++) {
             ItemStack supportItem = this.inventory.getStackInSlot(i);
             if (supportItem.getItem()instanceof SupportContainer supports) {
-                supports.getSupports(this.getLevel(), supportItem).forEach(support -> support.applySupport(result));
+                supports.getSupports(this.getLevel(), supportItem).forEach(support -> support.applySupport(result, this.level.getRandom()));
                 
             }
         }

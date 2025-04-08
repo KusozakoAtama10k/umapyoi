@@ -125,7 +125,10 @@ public class UmaPedestalBlockEntity extends SyncedBlockEntity implements Gachabl
                 .orElse(UmaData.DEFAULT_UMA_ID);
 
         ItemStack result = ItemRegistry.BLANK_UMA_SOUL.get().getDefaultInstance();
+        UmaData data = registry.get(holder);
         result.getOrCreateTag().putString("name", holder.toString());
+        result.getOrCreateTag().putString("identifier", data.getIdentifier().toString());
+        result.getOrCreateTag().putString("ranking", data.getGachaRanking().toString().toLowerCase());
 
         return result;
     }

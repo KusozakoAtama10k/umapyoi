@@ -22,6 +22,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.tracen.umapyoi.Umapyoi;
+import net.tracen.umapyoi.registry.cosmetics.CosmeticData;
 import net.tracen.umapyoi.registry.training.card.SupportCard;
 import net.tracen.umapyoi.registry.umadata.UmaData;
 
@@ -65,6 +66,10 @@ public class ClientUtils {
 
     public static Registry<SupportCard> getClientSupportCardRegistry() {
         return Minecraft.getInstance().getConnection().registryAccess().registryOrThrow(SupportCard.REGISTRY_KEY);
+    }
+    
+    public static Registry<CosmeticData> getClientCosmeticDataRegistry() {
+        return Minecraft.getInstance().getConnection().registryAccess().registryOrThrow(CosmeticData.REGISTRY_KEY);
     }
     
     public static void addSummonParticle(Level pLevel, BlockPos pPos) {

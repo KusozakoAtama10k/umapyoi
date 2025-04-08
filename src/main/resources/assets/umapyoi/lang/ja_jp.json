@@ -1,5 +1,10 @@
 {
   "itemGroup.umapyoi": "うまぴょいMod",
+  
+  "itemGroup.umapyoi.blank_souls": "フェードウマ娘魂",
+  "itemGroup.umapyoi.cards": "サポートカード",
+  "itemGroup.umapyoi.souls": "ウマ娘魂",
+  
   "curios.identifier.uma_soul": "ウマ娘魂",
   "curios.identifier.uma_suit": "ウマ娘衣装",
   "item.umapyoi.blank_uma_soul": "フェードウマ娘魂",
@@ -49,6 +54,9 @@
   "item.umapyoi.uma_ticket": "ウマ娘ガチャチケット",
   
   "block.umapyoi.uma_statues": "ウマ娘像",
+
+  "item.umapyoi.naginata": "なぎなた",
+  "item.umapyoi.baseball_bat": "金属バット",
   
   "umadata.umapyoi.common_uma": "名無しウマ娘",
   "umadata.umapyoi.common_uma_a": "名無しウマ娘",
@@ -153,6 +161,46 @@
   "umadata.umapyoi.happy_meek": "ハッピーミーク",
   "umadata.umapyoi.still_in_love": "スティルインラブ",
   
+  "umadata.umapyoi.rhein_kraft": "ラインクラフト",
+  
+  "umadata.umapyoi.buena_vista": "ブエナビスタ",
+  "umadata.umapyoi.eishin_flash": "エイシンフラッシュ",
+  
+  "umadata.umapyoi.agnes_digital": "アグネスデジタル",
+  
+  "umadata.umapyoi.yamanin_zephyr": "ヤマニンゼファー",
+  "umadata.umapyoi.satono_crown": "サトノクラウン",
+  "umadata.umapyoi.miya_yomogi": "西宮ヨモギ",
+  
+  "umadata.umapyoi.almond_eye": "アーモンドアイ",
+  
+  "support_card.umapyoi.ssr_kiryuuin_aoi.name": "[共に同じ道を！] 桐生院葵",
+  "support_card.umapyoi.ssr_anime_main.name": "[この先も！] 刻み続ける者たち",
+  "support_card.umapyoi.ssr_acupunctuist.name": "[ブスッといっとく？] 安心沢刺々美",
+  "support_card.umapyoi.r_tm_opera.name": "[トレセン学園] テイエムオペラオー",
+  "support_card.umapyoi.r_acupunctuist.name": "[笹針師] 安心沢刺々美",
+  "support_card.umapyoi.ssr_team_sirius.name": "[紡がれてゆく想い] チーム＜シリウス＞",
+  "support_card.umapyoi.ssr_three_goddesses.name": "[永劫続く栄光へ] 祖にして導く者",
+  "support_card.umapyoi.ssr_orfevre.name": "[只、君臨す。] オルフェーヴル",
+  "support_card.umapyoi.ssr_mejiro_mcqueen_stamina.name": "[心、夜風にさらわれて] メジロマックイーン",
+  "support_card.umapyoi.ssr_neo_universe_wisdom.name": "[V.E.R.2285のあなたへ] ネオユニヴァース",
+  "support_card.umapyoi.ssr_satono_diamond_stamina.name": "[その背中を越えて] サトノダイヤモンド",
+
+  "uma_skill.umapyoi.rapid": "快速",
+  "uma_skill.umapyoi.divine_speed": "神速",
+  "uma_skill.umapyoi.top_umamusme": "日本一のウマ娘",
+
+  "support.umapyoi.random_status_support": "ランダムステータスアップ",
+  "support.umapyoi.acupuncturist_support": "笹針",
+  "support.umapyoi.memory_support": "メモリアップ",
+
+  "umadata.umapyoi.orfevre": "オルフェーヴル",
+  "umadata.umapyoi.narita_brian": "ナリタブライアン",
+  "umadata.umapyoi.kiryuuin_aoi": "桐生院葵",
+  "umadata.umapyoi.anshinzawa_sasami": "安心沢刺々美",
+  "umadata.umapyoi.winning_ticket": "ウイニングチケット",
+
+  
   "umapyoi.jei.disassembly": "移籍登録",
   "umapyoi.jei.gacha": "召喚",
   "umapyoi.jei.gacha.need_book": "本が必要です",
@@ -191,6 +239,10 @@
   "umadata.umapyoi.mejiro_mcqueen": "メジロマックイーン",
   "umadata.umapyoi.copano_rickey": "コパノリッキー",
   "umadata.umapyoi.fine_motion": "ファインモーション",
+
+  "item.umapyoi.common_costume.name": "白いTシャツ",
+  "item.umapyoi.kindergarten_uniform.name": "幼稚園制服",
+  "item.umapyoi.starting_futute.name": "Starting Future",
   
   "support_card.umapyoi.adv_guts_card.name": "[上級トレーニング] 根性トレーニング",
   "support_card.umapyoi.adv_speed_card.name": "[上級トレーニング] スピードトレーニング",
@@ -274,6 +326,8 @@
   "uma_skill.umapyoi.dirt_runner": "ダート○",
   "uma_skill.umapyoi.turf_runner": "芝○",
   "uma_skill.umapyoi.mountain_climber": "登山家",
+
+  "uma_skill.umapyoi.inquisitive_mind": "探求心",
   
   "umapyoi.motivation.bad": "絶不調",
   "umapyoi.motivation.down": "不調",

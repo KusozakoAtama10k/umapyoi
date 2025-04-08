@@ -72,9 +72,9 @@ public abstract class AbstractSuitRenderer implements ICurioRenderer {
                 }
 
                 VertexConsumer vertexconsumer = renderTypeBuffer.getBuffer(
-                        RenderType.entityTranslucentCull(flat_flag ? getFlatTexture(tanned) : getTexture(tanned)));
+                        RenderType.entityTranslucentCull(flat_flag ? getFlatTexture(stack, tanned) : getTexture(stack, tanned)));
 
-                var pojo = ClientUtil.getModelPOJO(flat_flag ? getFlatModel() : getModel());
+                var pojo = ClientUtil.getModelPOJO(flat_flag ? getFlatModel(stack) : getModel(stack));
                 if (baseModel.needRefresh(pojo))
                     baseModel.loadModel(pojo);
                 if (MinecraftForge.EVENT_BUS.post(new RenderingUmaSuitEvent.Pre(entity, baseModel, partialTicks,
@@ -108,12 +108,12 @@ public abstract class AbstractSuitRenderer implements ICurioRenderer {
         });
     }
 
-    protected abstract ResourceLocation getModel();
+    protected abstract ResourceLocation getModel(ItemStack stack);
 
-    protected abstract ResourceLocation getTexture(boolean tanned);
+    protected abstract ResourceLocation getTexture(ItemStack stack, boolean tanned);
 
-    protected abstract ResourceLocation getFlatModel();
+    protected abstract ResourceLocation getFlatModel(ItemStack stack);
 
-    protected abstract ResourceLocation getFlatTexture(boolean tanned);
+    protected abstract ResourceLocation getFlatTexture(ItemStack stack, boolean tanned);
 
 }

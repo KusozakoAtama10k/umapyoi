@@ -122,6 +122,7 @@ public class UmaSelectScreen extends AbstractContainerScreen<UmaSelectMenu> impl
         String s = this.searchBox.getValue();
         this.init(pMinecraft, pWidth, pHeight);
         this.searchBox.setValue(s);
+        this.searchBox.setEditable(this.hasRequestItems());
     }
 
     @Override
@@ -147,7 +148,7 @@ public class UmaSelectScreen extends AbstractContainerScreen<UmaSelectMenu> impl
     }
 
     private void onNameChanged(String name) {
-        boolean hasItems = this.menu.getSlot(0).hasItem() && this.menu.getSlot(1).hasItem();
+        boolean hasItems = hasRequestItems();
         if (!hasItems)
             return;
         if (name.length() <= 50 && !this.name.equalsIgnoreCase(name)) {
@@ -156,6 +157,10 @@ public class UmaSelectScreen extends AbstractContainerScreen<UmaSelectMenu> impl
             NetPacketHandler.INSTANCE.sendToServer(new EmptyResultPacket());
         }
     }
+
+	public boolean hasRequestItems() {
+		return this.menu.getSlot(0).hasItem() && this.menu.getSlot(1).hasItem();
+	}
     
     protected void renderBg(GuiGraphics pPoseStack, float pPartialTick, int pX, int pY) {
         this.renderBackground(pPoseStack);

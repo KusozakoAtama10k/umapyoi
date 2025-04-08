@@ -10,12 +10,19 @@ import cn.mcmod_mmf.mmlib.client.model.BedrockHumanoidModel;
 import cn.mcmod_mmf.mmlib.client.model.bedrock.BedrockPart;
 import cn.mcmod_mmf.mmlib.client.model.pojo.BedrockModelPOJO;
 import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.ElytraItem;
+import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.UmapyoiConfig;
+import net.tracen.umapyoi.api.UmapyoiAPI;
+import net.tracen.umapyoi.data.tag.UmapyoiUmaDataTags;
+import net.tracen.umapyoi.registry.umadata.UmaData;
+import net.tracen.umapyoi.utils.ClientUtils;
+import net.tracen.umapyoi.utils.UmaSoulUtils;
 
 public class UmaPlayerModel<T extends LivingEntity> extends BedrockHumanoidModel<T> {
 
@@ -130,14 +137,19 @@ public class UmaPlayerModel<T extends LivingEntity> extends BedrockHumanoidModel
                 }
             else 
             	this.longHairParts.forEach(part -> part.xRot = 0F);
-
-            animationEarTail(entityIn, pAgeInTicks);
+        	ItemStack renderingUmaSoul = UmapyoiAPI.getRenderingUmaSoul(entityIn);
+			boolean isStucked = ClientUtils.getClientUmaDataRegistry()
+					.getHolder(ResourceKey.create(UmaData.REGISTRY_KEY, UmaSoulUtils.getName(renderingUmaSoul)))
+					.get().is(UmapyoiUmaDataTags.STUCK_MODEL);
+			if(!isStucked)
+				animationEarTail(entityIn, pAgeInTicks);
         }
         this.hat.copyFrom(head);
 
     }
 
     private void animationEarTail(T entityIn, float pAgeInTicks) {
+    	
         int ears_reminder = (int) ((pAgeInTicks + Math.abs(entityIn.getUUID().getLeastSignificantBits()) % 10)
                 % UmapyoiConfig.EAR_ANIMATION_INTERVAL.get());
         int tail_reminder = (int) ((pAgeInTicks + Math.abs(entityIn.getUUID().getLeastSignificantBits()) % 10)

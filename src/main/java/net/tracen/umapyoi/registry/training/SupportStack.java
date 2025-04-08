@@ -10,6 +10,7 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.tracen.umapyoi.events.ApplyTrainingSupportEvent;
@@ -66,9 +67,9 @@ public class SupportStack {
         }
     }
 
-    public boolean applySupport(ItemStack soul) {
+    public boolean applySupport(ItemStack soul, RandomSource rand) {
         if (!MinecraftForge.EVENT_BUS.post(new ApplyTrainingSupportEvent.Pre(this, soul))) {
-            boolean result = this.getFactor().applySupport(soul, this);
+            boolean result = this.getFactor().applySupport(soul, rand, this);
             return result && !MinecraftForge.EVENT_BUS.post(new ApplyTrainingSupportEvent.Post(this, soul));
         } else
             return false;

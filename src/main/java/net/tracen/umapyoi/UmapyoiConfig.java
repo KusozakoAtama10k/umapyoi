@@ -33,6 +33,8 @@ public class UmapyoiConfig {
     public static ForgeConfigSpec.BooleanValue OVERLAY_SWITCH;
     public static ForgeConfigSpec.BooleanValue TOOLTIP_SWITCH;
     
+    public static ForgeConfigSpec.DoubleValue ACUPUNCTUIST_SUPPORT_CHANCE;
+    
     public static ForgeConfigSpec.DoubleValue UMASOUL_MAX_SPEED;
     public static ForgeConfigSpec.DoubleValue UMASOUL_MAX_STRENGTH_ATTACK;
     public static ForgeConfigSpec.DoubleValue UMASOUL_MAX_STAMINA_HEALTH;
@@ -47,6 +49,10 @@ public class UmapyoiConfig {
     static {
         ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
         COMMON_BUILDER.comment("General settings").push("general");
+        
+        ACUPUNCTUIST_SUPPORT_CHANCE = COMMON_BUILDER
+                .comment("Determining the success chance of acupunctuist support.",
+                        "Set to 0 will only fail in trainning.").defineInRange("umasoul_max_speed", 0.4, 0.0, 1.0);
         
         UMASOUL_SPEED_PRECENT_ENABLE = COMMON_BUILDER.comment("Determines whether to add speed bouns as a percentage.",
                 "If enable, the bonus will be calculated as a percentage.").define("umasoul_speed_percent_enable", true);

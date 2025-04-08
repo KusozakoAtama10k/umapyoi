@@ -8,6 +8,7 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
 import net.tracen.umapyoi.Umapyoi;
+import net.tracen.umapyoi.registry.skills.DivineSpeedSkill;
 import net.tracen.umapyoi.registry.skills.HealSkill;
 import net.tracen.umapyoi.registry.skills.LastLegSkill;
 import net.tracen.umapyoi.registry.skills.LowHealthBuffSkill;
@@ -17,6 +18,7 @@ import net.tracen.umapyoi.registry.skills.SereneSkill;
 import net.tracen.umapyoi.registry.skills.SkillType;
 import net.tracen.umapyoi.registry.skills.SpeedSkill;
 import net.tracen.umapyoi.registry.skills.SteelWillSkill;
+import net.tracen.umapyoi.registry.skills.TopUmamusumeSkill;
 import net.tracen.umapyoi.registry.skills.UmaSkill;
 import net.tracen.umapyoi.registry.skills.passive.PassiveSkill;
 
@@ -61,7 +63,7 @@ public class UmaSkillRegistry {
             () -> new SereneSkill(new UmaSkill.Builder().level(1).type(SkillType.HEAL).actionPoint(300).requiredWisdom(2)));
     
     public static final RegistryObject<UmaSkill> STEEL_WILL = SKILLS.register("steel_will",
-            () -> new SteelWillSkill(new UmaSkill.Builder().level(2).type(SkillType.HEAL).actionPoint(1200).requiredWisdom(8)));
+            () -> new SteelWillSkill(new UmaSkill.Builder().level(2).type(SkillType.HEAL).actionPoint(1200).requiredWisdom(8).nonInheritable()));
     
     public static final RegistryObject<UmaSkill> MOUNTAIN_CLIMBER = SKILLS.register("mountain_climber",
             () -> new PassiveSkill(new UmaSkill.Builder().level(1).requiredWisdom(2)));
@@ -76,5 +78,17 @@ public class UmaSkillRegistry {
             () -> new PassiveSkill(new UmaSkill.Builder().level(1).requiredWisdom(2)));
 
     public static final RegistryObject<UmaSkill> SNOW_RUNNER = SKILLS.register("snow_runner",
+            () -> new PassiveSkill(new UmaSkill.Builder().level(1).requiredWisdom(2)));
+    
+    public static final RegistryObject<UmaSkill> RAPID = SKILLS.register("rapid",
+            () -> new DivineSpeedSkill(new UmaSkill.Builder().level(1).requiredWisdom(2).upperSkill(new ResourceLocation(Umapyoi.MODID, "divine_speed")).type(SkillType.BUFF), 200));
+    
+    public static final RegistryObject<UmaSkill> DIVINE_SPEED = SKILLS.register("divine_speed",
+            () -> new DivineSpeedSkill(new UmaSkill.Builder().level(2).requiredWisdom(5).actionPoint(900).type(SkillType.BUFF), 400));
+    
+    public static final RegistryObject<UmaSkill> TOP_UMAMUSUME = SKILLS.register("top_umamusme",
+            () -> new TopUmamusumeSkill(new UmaSkill.Builder().level(3).type(SkillType.BUFF).actionPoint(1200).requiredWisdom(8).nonInheritable()));
+    
+    public static final RegistryObject<UmaSkill> INQUISITIVE_MIND = SKILLS.register("inquisitive_mind",
             () -> new PassiveSkill(new UmaSkill.Builder().level(1).requiredWisdom(2)));
 }

@@ -15,6 +15,7 @@ import net.minecraft.world.level.Level;
 import net.minecraftforge.common.ForgeMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.tracen.umapyoi.UmapyoiConfig;
+import net.tracen.umapyoi.events.ApplyUmasoulAttributeEvent;
 import net.tracen.umapyoi.events.ResumeActionPointEvent;
 import net.tracen.umapyoi.registry.umadata.Growth;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
@@ -29,6 +30,12 @@ public class UmaSoulCuriosWrapper implements ICurio {
     public UmaSoulCuriosWrapper(ItemStack stack) {
         this.stack = stack;
     }
+    
+    @Override
+    public boolean canEquip(SlotContext slotContext) {
+    	return CuriosApi.getEntitySlots(slotContext.entity().getType()).containsKey("uma_soul") 
+    			&& slotContext.identifier().equals("uma_soul");
+    }
 
     @Override
     public SoundInfo getEquipSound(SlotContext slotContext) {
@@ -42,12 +49,14 @@ public class UmaSoulCuriosWrapper implements ICurio {
 
     @Override
     public void curioTick(SlotContext slotContext) {
-        if (!slotContext.identifier().equalsIgnoreCase("uma_soul"))
-            return;
-        LivingEntity entity = slotContext.entity();
-        Level commandSenderWorld = entity.getCommandSenderWorld();
         if (this.getStack().isEmpty())
             return;
+        if (!slotContext.identifier().equalsIgnoreCase("uma_soul"))
+            return;
+        
+        LivingEntity entity = slotContext.entity();
+        Level commandSenderWorld = entity.getCommandSenderWorld();
+
         if (!commandSenderWorld.isClientSide()) {
             resumeActionPoint(entity);
         }
@@ -66,6 +75,7 @@ public class UmaSoulCuriosWrapper implements ICurio {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
+//        slotContext.entity().isSprinting();
         if (!slotContext.identifier().equalsIgnoreCase("uma_soul"))
             return atts;
         CuriosApi.addSlotModifier(atts, "uma_suit", uuid, 1.0, AttributeModifier.Operation.ADDITION);
@@ -103,8 +113,9 @@ public class UmaSoulCuriosWrapper implements ICurio {
                         getExactProperty(StatusType.GUTS.getId(), UmapyoiConfig.UMASOUL_MAX_GUTS_ARMOR_TOUGHNESS.get()),
                         UmapyoiConfig.UMASOUL_GUTS_PRECENT_ENABLE.get() ? AttributeModifier.Operation.MULTIPLY_TOTAL
                                 : AttributeModifier.Operation.ADDITION));
-
-        return atts;
+        ApplyUmasoulAttributeEvent event = new ApplyUmasoulAttributeEvent(this.getStack(), slotContext, uuid, atts);
+		MinecraftForge.EVENT_BUS.post(event);
+        return event.getAttributes();
     }
 
     public double getExactProperty(int num, double limit) {

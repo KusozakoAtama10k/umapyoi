@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 
 import com.google.common.collect.Lists;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.Container;
 import net.minecraft.world.SimpleContainer;
@@ -27,11 +28,13 @@ import net.tracen.umapyoi.block.BlockRegistry;
 import net.tracen.umapyoi.item.ItemRegistry;
 import net.tracen.umapyoi.item.UmaSoulItem;
 import net.tracen.umapyoi.registry.UmaFactorRegistry;
+import net.tracen.umapyoi.registry.UmaSkillRegistry;
 import net.tracen.umapyoi.registry.factors.FactorType;
 import net.tracen.umapyoi.registry.factors.SkillFactor;
 import net.tracen.umapyoi.registry.factors.StatusFactor;
 import net.tracen.umapyoi.registry.factors.UmaFactor;
 import net.tracen.umapyoi.registry.factors.UmaFactorStack;
+import net.tracen.umapyoi.registry.skills.UmaSkill;
 import net.tracen.umapyoi.registry.umadata.Growth;
 import net.tracen.umapyoi.utils.ResultRankingUtils;
 import net.tracen.umapyoi.utils.UmaFactorUtils;
@@ -207,14 +210,21 @@ public class RetireRegisterMenu extends AbstractContainerMenu {
 
     public void createSkillFactors(ItemStack inputSoul, int ranking, List<UmaFactorStack> stackList) {
         UmaSoulUtils.getSkills(inputSoul).stream().skip(1).forEach(skillTag -> {
-            int skillLevel = this.rand.nextInt(ranking > 19 ? 6 : 4);
-            if (skillLevel == 0)
-                return;
-            UmaFactorStack skillFactor = new UmaFactorStack(UmaFactorRegistry.SKILL_FACTOR.get(), skillLevel);
-            skillFactor.getOrCreateTag().putString("skill", skillTag.getAsString());
-            stackList.add(skillFactor);
+        	var name = skillTag.getAsString();
+        	ResourceLocation skill = ResourceLocation.tryParse(name);
+            if (skill != null && UmaSkillRegistry.REGISTRY.get().containsKey(skill)) {
+                UmaSkill result = UmaSkillRegistry.REGISTRY.get().getValue(skill);
+                if(!result.isInheritable())
+                	return;
+                
+                int skillLevel = this.rand.nextInt(ranking > 19 ? 6 : 4);
+                if (skillLevel == 0)
+                    return;
+                UmaFactorStack skillFactor = new UmaFactorStack(UmaFactorRegistry.SKILL_FACTOR.get(), skillLevel);
+                skillFactor.getOrCreateTag().putString("skill", name);
+                stackList.add(skillFactor);
+            }
         });
-
     }
 
     public void createOtherFactors(ItemStack inputSoul, int ranking, List<UmaFactorStack> stackList) {

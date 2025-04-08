@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.block.BlockRegistry;
+import net.tracen.umapyoi.data.builtin.CostumeDataRegistry;
 import net.tracen.umapyoi.data.builtin.SupportCardRegistry;
 import net.tracen.umapyoi.data.builtin.UmaDataRegistry;
 import net.tracen.umapyoi.effect.MobEffectRegistry;
@@ -16,6 +17,7 @@ import net.tracen.umapyoi.item.ItemRegistry;
 import net.tracen.umapyoi.registry.TrainingSupportRegistry;
 import net.tracen.umapyoi.registry.UmaFactorRegistry;
 import net.tracen.umapyoi.registry.UmaSkillRegistry;
+import net.tracen.umapyoi.registry.cosmetics.CosmeticData;
 import net.tracen.umapyoi.registry.factors.UmaFactor;
 import net.tracen.umapyoi.registry.skills.UmaSkill;
 import net.tracen.umapyoi.registry.training.TrainingSupport;
@@ -44,6 +46,10 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         add(ItemRegistry.TRAINNING_SUIT.get(), "Tracen Training Suit");
         add(ItemRegistry.SUMMER_UNIFORM.get(), "Tracen Summer Uniform");
         add(ItemRegistry.WINTER_UNIFORM.get(), "Tracen Winter Uniform");
+        
+        addCostume(CostumeDataRegistry.COMMON_COSTUME, "White T-Shirt");
+        addCostume(CostumeDataRegistry.STARTING_FUTURE, "Starting Future Costume");
+        addCostume(CostumeDataRegistry.KINDERGARTEN_UNIFORM, "Kindergarten Uniform");
 
         add(ItemRegistry.SPEED_LOW_ITEM.get(), "Speed Notepad");
         add(ItemRegistry.SPEED_MID_ITEM.get(), "Speed Writings");
@@ -88,6 +94,9 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         add(ItemRegistry.HORSESHOE_SILVER.get(), "Silver Horseshoe Crystal");
         add(ItemRegistry.HORSESHOE_GOLD.get(), "Golden Horseshoe Crystal");
         add(ItemRegistry.HORSESHOE_RAINBOW.get(), "Rainbow Horseshoe Crystal");
+        
+        add(ItemRegistry.NAGINATA.get(), "Naginata");
+        add(ItemRegistry.BASEBALL_BAT.get(), "Metal Baseball Bat");
 
         add(BlockRegistry.THREE_GODDESS.get(), "Three Goddesses Statue");
         add(BlockRegistry.THREE_GODDESS_UPPER.get(), "Three Goddesses Statue");
@@ -116,6 +125,9 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         add("curios.identifier.uma_soul", "Umamusume Soul");
         add("curios.identifier.uma_suit", "Umamusume Apparel");
         add("itemGroup.umapyoi", "Umapyoi");
+        add("itemGroup.umapyoi.souls", "Umamusume Souls");
+        add("itemGroup.umapyoi.blank_souls", "Faded Umamusume Souls");
+        add("itemGroup.umapyoi.cards", "Support Card");
         
         addTooltip(".umadata.name", "Umamusume's Name:%s");
         addTooltip(".support_card.name", "Support Card:%s");
@@ -145,6 +157,10 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         addSupport(TrainingSupportRegistry.WISDOM_SUPPORT, "Wisdom Increase");
         addSupport(TrainingSupportRegistry.SKILL_SUPPORT, "Learning Skill");
         addSupport(TrainingSupportRegistry.AP_SUPPORT, "Action Pt Increase");
+        
+        addSupport(TrainingSupportRegistry.RANDOM_STATUS_SUPPORT, "Random Status Increase");
+        addSupport(TrainingSupportRegistry.ACUPUNCTUIST_SUPPORT, "Acupunctuist Support");
+        addSupport(TrainingSupportRegistry.MEMORY_SUPPORT, "Memory Increase");
 
         addFactor(UmaFactorRegistry.SPEED_FACTOR, "Speed Factor");
         addFactor(UmaFactorRegistry.STAMINA_FACTOR, "Stamina Factor");
@@ -186,6 +202,12 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         addSkill(UmaSkillRegistry.TURF_RUNNER, "Turf Runner");
         addSkill(UmaSkillRegistry.DIRT_RUNNER, "Dirt Runner");
         addSkill(UmaSkillRegistry.SNOW_RUNNER, "Snow Runner");
+        
+        addSkill(UmaSkillRegistry.RAPID, "Rapid");
+        addSkill(UmaSkillRegistry.DIVINE_SPEED, "Divine Speed");
+        addSkill(UmaSkillRegistry.TOP_UMAMUSUME, "Japan's #1 Umamusume");
+        
+        addSkill(UmaSkillRegistry.INQUISITIVE_MIND, "Inquisitive Mind");
 
         add("container.umapyoi.three_goddess", "Three Goddesses Statue");
         add("container.umapyoi.training_facility", "Training Terminal");
@@ -359,12 +381,45 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         addUma(UmaDataRegistry.STILL_IN_LOVE, "Still In Love");
         addUma(UmaDataRegistry.HAPPY_MEEK, "Happy Meek");
         addUma(UmaDataRegistry.KATSURAGI_ACE, "Katsuragi Ace");
+        addUma(UmaDataRegistry.RHEIN_KRAFT, "Rhein Kraft");
+        
+        addUma(UmaDataRegistry.BUENA_VISTA, "Buena Vista");
+        
+        addUma(UmaDataRegistry.KS_MIRACLE, "K.S. Miracle");
+        addUma(UmaDataRegistry.EISHIN_FLASH, "Eishin Flash");
+        
+        addUma(UmaDataRegistry.AGNES_DIGITAL, "Agnes Digital");
+        
+        addUma(UmaDataRegistry.SATONO_CROWN, "Satono Crown");
+        addUma(UmaDataRegistry.YAMANIN_ZEPHYR, "Yamanin Zephyr");
+        
+        addUma(UmaDataRegistry.MIYA_YOMOGI, "Miya Yomogi");
+        addUma(UmaDataRegistry.ALMOND_EYE, "Almond Eye");
         
         add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "super_creek")), "Super Creek");
-        add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "ks_miracle")), "K.S. Miracle");
         add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "mejiro_ramonu")), "Mejiro Ramonu");
+        
+        add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "winning_ticket")), "Winning Ticket");
+        add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "narita_brian")), "Narita Brian");
+        add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "orfevre")), "Orfevre");
+        
+        add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "kiryuuin_aoi")), "Kiryuuin Aoi");
+        add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "anshinzawa_sasami")), "Anshinzawa Sasami");
 
         addSupportCard(SupportCard.EMPTY_ID, "Blank Support Card");
+        
+        addSupportCard(SupportCardRegistry.R_TM_OPERA, "[Tracen Academy] TM Opera O");
+        addSupportCard(SupportCardRegistry.R_ACUPUNCTUIST, "[Acupunctuist] Anshinzawa Sasami");
+        addSupportCard(SupportCardRegistry.SSR_ACUPUNCTUIST, "[Want a Stab?] Anshinzawa Sasami");
+        addSupportCard(SupportCardRegistry.SSR_THREE_GODDESSES, "[In Pursuit of Eternal Glory] The Progenitors & Guides");
+        addSupportCard(SupportCardRegistry.SSR_TEAM_SIRIUS, "[Accumulating Feelings] Team Sirius");
+        addSupportCard(SupportCardRegistry.SSR_ORFEVRE, "[Unconditional Subjugation] Orfevre");
+        
+        addSupportCard(SupportCardRegistry.SSR_ANIME_MAIN, "[Into the future!] Timeless Icons");
+        addSupportCard(SupportCardRegistry.SSR_NEO_UNIVERSE_WIDSOM, "[My dear V.E.R.2285] Neo Universe");
+        addSupportCard(SupportCardRegistry.SSR_MEJIRO_MCQUEEN_STAMINA, "[My heart on a night breeze] Mejiro McQueen");
+        addSupportCard(SupportCardRegistry.SSR_SATONO_DIAMOND_STAMINA, "[Surpassing That Back] Satono Diamond");
+        addSupportCard(SupportCardRegistry.SSR_KIRYUUIN_AOI, "[Together on the Same Path!] Kiryuuin Aoi");
         
         addSupportCard(SupportCardRegistry.BASIC_SPEED_CARD, "[Basic Training] Speed Training");
         addSupportCard(SupportCardRegistry.BASIC_STAMINA_CARD, "[Basic Training] Stamina Training");
@@ -463,6 +518,14 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
 
     private void addUma(ResourceLocation key, String name) {
         add(Util.makeDescriptionId("umadata", key), name);
+    }
+    
+    private void addCostume(ResourceKey<CosmeticData> data, String name) {
+        this.addCostume(data.location(), name);
+    }
+
+    private void addCostume(ResourceLocation key, String name) {
+        add(Util.makeDescriptionId("item", key) + ".name", name);
     }
 
     private void addSupport(Supplier<TrainingSupport> key, String name) {

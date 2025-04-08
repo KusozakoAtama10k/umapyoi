@@ -2,6 +2,7 @@ package net.tracen.umapyoi.events.handler;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraftforge.common.Tags;
 import net.minecraftforge.event.AnvilUpdateEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -25,9 +26,28 @@ public class AnvilEvents {
         darleySoul(event, soul, material);
         byerleySoul(event, soul, material);
         godolphinSoul(event, soul, material);
+        miyaSoul(event, soul, material);
     }
 
-    public static void venusParkSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+    private static void miyaSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+        if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
+        if(!material.is(UmapyoiItemTags.BAMBOO)) return;
+        var registry = UmapyoiAPI.getUmaDataRegistry(event.getPlayer().level());
+        ResourceLocation name = soul.getOrCreateTag().contains("name") ?
+                ResourceLocation.tryParse(soul.getOrCreateTag().getString("name")) : UmaDataRegistry.COMMON_UMA.location();
+        if(!registry.containsKey(name) || registry.get(name).getGachaRanking() != GachaRanking.R) return;
+        
+        var id = UmaDataRegistry.MIYA_YOMOGI.location();
+        if(!registry.containsKey(id)) return;
+        ItemStack egg = ItemRegistry.BLANK_UMA_SOUL.get().getDefaultInstance();
+        egg.getOrCreateTag().putString("name", id.toString());
+
+        event.setMaterialCost(1);
+        event.setCost(5);
+        event.setOutput(egg.copy());
+	}
+
+	public static void venusParkSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
         if(!material.is(UmapyoiItemTags.BREAD)) return;
         if(!event.getName().equalsIgnoreCase("vivelafrance")) return;
@@ -70,8 +90,8 @@ public class AnvilEvents {
     
     public static void dumnheintSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
-        if(!material.is(Tags.Items.GUNPOWDER)) return;
-        if(!event.getName().equalsIgnoreCase("kino")) return;
+        if(!material.is(Items.LAVA_BUCKET)) return;
+        if(!event.getName().equalsIgnoreCase("cinnabar")) return;
         var registry = UmapyoiAPI.getUmaDataRegistry(event.getPlayer().level());
         ResourceLocation name = soul.getOrCreateTag().contains("name") ?
                 ResourceLocation.tryParse(soul.getOrCreateTag().getString("name")) : UmaDataRegistry.COMMON_UMA.location();

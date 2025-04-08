@@ -5,7 +5,8 @@ plugins {
     id 'net.minecraftforge.gradle' version '[6.0,6.2)'
      // This should be below the net.minecraftforge.gradle plugin
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
-    id 'org.spongepowered.mixin' version '0.7-SNAPSHOT'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id "com.hypherionmc.modutils.modpublisher" version "2.1.6"
 }
 
 // Mixin
@@ -14,9 +15,14 @@ apply plugin: 'org.spongepowered.mixin'
 mixin {
     // MixinGradle Settings
     add sourceSets.main, 'mixins.umapyoi.refmap.json'
+    config 'mixins.umapyoi.json'
+
+    // Specify options for dev run configs
+    debug.verbose = true
+    debug.export = true
 }
 
-version = '1.5.34-1.20.1'
+version = '1.8.48-1.20.1'
 group = 'net.tracen' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'umapyoi'
 
@@ -186,4 +192,92 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+publisher {
+    // Setup the required API keys. You only need to define the keys for 
+    // the platforms you plan on uploading to
+    apiKeys {
+        // Modrinth Token
+        modrinth System.getenv("MODRINTH_TOKEN")
+        // Curseforge Token
+        curseforge System.getenv("CURSE_TOKEN")
+    }
+
+    // Enable Debug mode. When enabled, no files will actually be uploaded
+    // setDebug(true)
+
+    // Curseforge Project ID
+    setCurseID("776121")
+
+    // Modrinth Project ID
+    setModrinthID("umapyoi")
+
+    // Type of release. beta, alpha or release
+    setVersionType("release")
+
+    // Changelog. This can be a file, string, OR, gist/github url
+    // For example: markdown.md, or "This is my changelog"
+    // Or: https://raw.githubusercontent.com/hypherionmc/changelogs/changelog.md
+    // Or https://gist.githubusercontent.com/hypherionmc/92f825d3c9337964cc77c9c8c9bf65e6/raw/ceeaaee5b98c688a23398864fe480b84796a1651/test_gist.md
+    setChangelog("Changelog WIP, Standby")
+
+    // Required for Modrinth/GitHub
+    setVersion("${project.version}")
+
+    // Fancy display name for the upload.
+    // Will default to the project version if not set
+    setDisplayName("[1.20.1] Umapyoi - ${project.version}")
+
+    // The supported game versions
+    setGameVersions("1.20.1")
+
+    // The modloaders your upload supports.
+    // This can also be an Enum from ModLoader,
+    // like setLoaders(ModLoader.FABRIC, ModLoader.FORGE)
+    setLoaders("forge", "neoforge")
+
+    // The new Curseforge Environment tag. Optional
+    // Valid values are "server", "client" or "both"
+    // You can also use CurseEnvironment.BOTH, or CurseEnvironment.SERVER or CurseEnvironment.CLIENT
+    setCurseEnvironment("both")
+
+    // The file to be uploaded. This can be a file, task, or string.
+    // setArtifact("build/libs/mymod.jar")
+    // setArtifact(jar.getArchiveFile().get())
+    // If this is a task, the task specified will be executed before publishing
+    setArtifact(jar)
+
+    // Add supported java versions. Currently only used by CurseForge
+    setJavaVersions("Java 17", "Java 18", "Java 21", "Java 20", "Java 21")
+
+    // Safety check to check if the artifact contains a valid mod metadata entry,
+    // which could possibly mean that the jar is empty
+    setDisableEmptyJarCheck(true)
+
+	// Curse Dependencies
+	curseDepends {
+		required "mysterious-mountain-lib", "curios"
+		
+	    optional 'create'
+
+	    optional 'jei'
+	    
+	    optional 'patchouli'
+	    	    
+	    optional 'terrafirmacraft'
+	}
+	
+	modrinthDepends {
+		required "mmlib", "curios"
+		
+	    optional 'create'
+
+	    optional 'jei'
+	    
+	    optional 'patchouli'
+	    	    
+	    optional 'terrafirmacraft'
+	}
+
 }

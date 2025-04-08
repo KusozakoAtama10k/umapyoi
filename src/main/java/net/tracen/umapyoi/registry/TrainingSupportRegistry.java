@@ -7,7 +7,9 @@ import net.minecraftforge.registries.IForgeRegistry;
 import net.minecraftforge.registries.RegistryBuilder;
 import net.minecraftforge.registries.RegistryObject;
 import net.tracen.umapyoi.Umapyoi;
+import net.tracen.umapyoi.registry.training.BorealisSupport;
 import net.tracen.umapyoi.registry.training.ExtraStatusSupport;
+import net.tracen.umapyoi.registry.training.RandomStatusSupport;
 import net.tracen.umapyoi.registry.training.SkillSupport;
 import net.tracen.umapyoi.registry.training.StatusSupport;
 import net.tracen.umapyoi.registry.training.TrainingSupport;
@@ -40,5 +42,14 @@ public class TrainingSupportRegistry {
     
     public static final RegistryObject<TrainingSupport> AP_SUPPORT = SUPPORTS.register("actionpoint_support",
             () -> new ExtraStatusSupport(3));
+    
+    public static final RegistryObject<TrainingSupport> MEMORY_SUPPORT = SUPPORTS.register("memory_support",
+            () -> new ExtraStatusSupport(2));
+    
+    public static final RegistryObject<TrainingSupport> RANDOM_STATUS_SUPPORT = SUPPORTS.register("random_status_support",
+            RandomStatusSupport::new);
+
+    public static final RegistryObject<TrainingSupport> ACUPUNCTUIST_SUPPORT = SUPPORTS.register("acupuncturist_support",
+            BorealisSupport::new);
 
 }

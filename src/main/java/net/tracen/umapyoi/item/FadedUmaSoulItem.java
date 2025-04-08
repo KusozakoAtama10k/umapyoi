@@ -34,5 +34,7 @@ public class FadedUmaSoulItem extends Item {
         return Optional.ofNullable(ResourceLocation.tryParse(pStack.getOrCreateTag().getString("name")))
                 .orElse(UmaData.DEFAULT_UMA_ID);
     }
+    
+    
 
 }

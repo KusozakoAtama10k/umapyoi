@@ -15,6 +15,7 @@ import net.tracen.umapyoi.container.ContainerRegistry;
 import net.tracen.umapyoi.effect.MobEffectRegistry;
 import net.tracen.umapyoi.item.ItemRegistry;
 import net.tracen.umapyoi.network.NetPacketHandler;
+import net.tracen.umapyoi.recipe.RecipeSerializerRegistry;
 import net.tracen.umapyoi.registry.TrainingSupportRegistry;
 import net.tracen.umapyoi.registry.UmaFactorRegistry;
 import net.tracen.umapyoi.registry.UmaSkillRegistry;
@@ -45,6 +46,7 @@ public class Umapyoi {
         ContainerRegistry.CONTAINER_TYPES.register(modEventBus);
         VillageRegistry.POI_TYPES.register(modEventBus);
         VillageRegistry.PROFESSIONS.register(modEventBus);
+        RecipeSerializerRegistry.RECIPE_SERIALIZER.register(modEventBus);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, UmapyoiConfig.COMMON_CONFIG);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, UmapyoiConfig.CLIENT_CONFIG);
     }

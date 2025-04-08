@@ -8,6 +8,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.block.BlockRegistry;
 import net.tracen.umapyoi.item.ItemRegistry;
+import net.tracen.umapyoi.item.weapon.UmaWeaponItem;
 
 public class UmapyoiItemModelProvider extends AbstractItemModelProvider {
 
@@ -18,8 +19,12 @@ public class UmapyoiItemModelProvider extends AbstractItemModelProvider {
     @Override
     protected void registerModels() {
         ItemRegistry.ITEMS.getEntries().forEach((item) -> {
-            if (item == ItemRegistry.HACHIMI_MID || item == ItemRegistry.HACHIMI_BIG)
+            if (item == ItemRegistry.HACHIMI_MID || item == ItemRegistry.UMA_SOUL_DISPLAY || item == ItemRegistry.HACHIMI_BIG)
                 return;
+            
+            if (item.get() instanceof UmaWeaponItem)
+                return;
+            
             if (item == ItemRegistry.UMA_PEDESTAL) {
                 withExistingParent(blockName(BlockRegistry.UMA_PEDESTAL),
                         new ResourceLocation("umapyoi:block/pedestal"));
@@ -32,7 +37,7 @@ public class UmapyoiItemModelProvider extends AbstractItemModelProvider {
                 return;
             }
             
-            if (item.get()instanceof BlockItem block
+            if (item.get() instanceof BlockItem block
                     && !(item == ItemRegistry.THREE_GODDESS || item == ItemRegistry.UMA_STATUE))
                 itemBlock(block::getBlock);
 

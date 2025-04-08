@@ -55,7 +55,7 @@ public class TrainingItem extends Item implements SupportContainer {
             return InteractionResultHolder.fail(itemInHand);
         }
         
-        if (this.getSupport().applySupport(soul)) {
+        if (this.getSupport().applySupport(soul, pLevel.getRandom())) {
             UmaSoulUtils.downLearningTimes(soul);
             pPlayer.getCooldowns().addCooldown(itemInHand.getItem(), 30);
             itemInHand.shrink(1);

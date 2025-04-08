@@ -12,6 +12,7 @@ import net.tracen.umapyoi.api.UmapyoiAPI;
 import net.tracen.umapyoi.effect.MobEffectRegistry;
 import net.tracen.umapyoi.events.ApplyFactorEvent;
 import net.tracen.umapyoi.events.ApplyTrainingSupportEvent;
+import net.tracen.umapyoi.events.SkillEvent;
 import net.tracen.umapyoi.registry.umadata.Motivations;
 import net.tracen.umapyoi.utils.ResultRankingUtils;
 import net.tracen.umapyoi.utils.UmaSkillUtils;
@@ -59,6 +60,14 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void onFactorFinished(ApplyFactorEvent.Post event) {
+        var umaSoul = event.getUmaSoul();
+        UmaSkillUtils.syncActionPoint(umaSoul);
+        CompoundTag tag = umaSoul.getOrCreateTag();
+        tag.putInt("resultRanking", ResultRankingUtils.generateRanking(umaSoul));
+    }
+    
+    @SubscribeEvent
+    public static void onSkillLearned(SkillEvent.LearnSkillEvent event) {
         var umaSoul = event.getUmaSoul();
         UmaSkillUtils.syncActionPoint(umaSoul);
         CompoundTag tag = umaSoul.getOrCreateTag();

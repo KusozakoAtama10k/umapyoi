@@ -9,6 +9,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.registry.TrainingSupportRegistry;
@@ -25,7 +26,7 @@ public class TrainingSupport{
     public TrainingSupport() {
     }
 
-    public boolean applySupport(ItemStack soul, SupportStack stack) {
+    public boolean applySupport(ItemStack soul, RandomSource rand, SupportStack stack) {
         return true;
     }
 
@@ -53,7 +54,7 @@ public class TrainingSupport{
     }
 
     public Component getFullDescription(int pLevel) {
-        MutableComponent mutablecomponent = Component.translatable(this.getDescriptionId());
+        MutableComponent mutablecomponent = this.getDescription().copy();
         mutablecomponent.withStyle(ChatFormatting.GRAY);
         mutablecomponent.append(" ").append(Component.translatable("enchantment.level." + pLevel));
         return mutablecomponent;

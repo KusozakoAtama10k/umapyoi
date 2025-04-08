@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeInstance;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier.Operation;
@@ -18,14 +19,27 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.tracen.umapyoi.api.UmapyoiAPI;
 import net.tracen.umapyoi.data.tag.UmapyoiBlockTags;
+import net.tracen.umapyoi.events.ApplyUmasoulAttributeEvent;
 import net.tracen.umapyoi.registry.UmaSkillRegistry;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
+import net.tracen.umapyoi.utils.UmaStatusUtils.StatusType;
 
 @Mod.EventBusSubscriber
 public class PassiveSkillEvents {
 
     public static final UUID PASSIVEUUID = UUID.fromString("306e284a-8a74-11ee-b9d1-0242ac120002");
 
+    @SubscribeEvent
+    public static void testPassiveSkill_im(ApplyUmasoulAttributeEvent event) {
+        var soul = event.getUmaSoul();
+        if (UmaSoulUtils.hasSkill(soul, UmaSkillRegistry.INQUISITIVE_MIND.getId())) {
+        	var speedFlag = UmaSoulUtils.getProperty(soul)[StatusType.SPEED.getId()] >= 12;
+        	var wisdomFlag = UmaSoulUtils.getProperty(soul)[StatusType.WISDOM.getId()] >= 12;
+        	event.getAttributes().put(Attributes.ATTACK_SPEED, new AttributeModifier(PASSIVEUUID, "passive_speed_bonus",
+        			speedFlag && wisdomFlag ? 0.075D :0.05D, AttributeModifier.Operation.MULTIPLY_TOTAL));
+        }
+    }
+    
     @SubscribeEvent
     public static void testPassiveSkill_att(PlayerEvent.BreakSpeed event) {
         Player player = event.getEntity();

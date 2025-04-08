@@ -5,8 +5,10 @@ import java.util.concurrent.CompletableFuture;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.tracen.umapyoi.Umapyoi;
 import net.tracen.umapyoi.item.ItemRegistry;
@@ -20,6 +22,10 @@ public class UmapyoiItemTagsProvider extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider lookup) {
+    	tag(UmapyoiItemTags.SHOULD_RENDER).add(Items.ELYTRA)
+    	.addOptional(new ResourceLocation("corn_delight:cob_pipe"))
+    	.addOptional(new ResourceLocation("create:goggles"));
+    	
         tag(UmapyoiItemTags.COMMON_GACHA_ITEM).add(ItemRegistry.JEWEL.get()).add(ItemRegistry.BLANK_TICKET.get());
         tag(UmapyoiItemTags.SR_UMA_TICKET).add(ItemRegistry.SR_UMA_TICKET.get());
         tag(UmapyoiItemTags.SSR_UMA_TICKET).add(ItemRegistry.SSR_UMA_TICKET.get());
@@ -31,6 +37,7 @@ public class UmapyoiItemTagsProvider extends ItemTagsProvider {
         
         tag(UmapyoiItemTags.BREAD).addTag(UmapyoiItemTags.BREAD_WHEAT);
         tag(UmapyoiItemTags.BREAD_WHEAT).add(Items.BREAD);
+        tag(UmapyoiItemTags.BAMBOO).add(Items.BAMBOO);
         
         tag(UmapyoiItemTags.UMA_TICKET).addTag(UmapyoiItemTags.COMMON_GACHA_ITEM).add(ItemRegistry.UMA_TICKET.get())
                 .addTag(UmapyoiItemTags.SR_UMA_TICKET).addTag(UmapyoiItemTags.SSR_UMA_TICKET);
@@ -39,6 +46,7 @@ public class UmapyoiItemTagsProvider extends ItemTagsProvider {
         
         tag(UmapyoiItemTags.HORSESHOE).add(ItemRegistry.HORSESHOE_GOLD.get())
             .add(ItemRegistry.HORSESHOE_SILVER.get()).add(ItemRegistry.HORSESHOE_RAINBOW.get());
+        tag(Tags.Items.CROPS_CARROT).addOptional(ResourceLocation.tryParse("tfc:food/carrot"));
     }
 
 }

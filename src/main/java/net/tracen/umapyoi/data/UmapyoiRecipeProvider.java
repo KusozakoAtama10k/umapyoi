@@ -55,10 +55,33 @@ public class UmapyoiRecipeProvider extends AbstractRecipeProvider {
                 .requires(ItemRegistry.BLANK_TICKET.get()).requires(ItemRegistry.HORSESHOE_RAINBOW.get())
                 .unlockedBy("has_item", has(ItemRegistry.BLANK_TICKET.get())).save(consumer);
 
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, BlockRegistry.DISASSEMBLY_BLOCK.get()).pattern(" J ")
-                .pattern("ALA").pattern("AAA").define('A', Tags.Items.INGOTS_IRON).define('L', Items.BLAST_FURNACE)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, BlockRegistry.DISASSEMBLY_BLOCK.get())
+        		.pattern(" J ")
+        		.pattern(" A ")
+                .pattern("ALA")
+                .define('A', Tags.Items.INGOTS_IRON)
+                .define('L', Items.LECTERN)
                 .define('J', ItemRegistry.BLANK_TICKET.get())
                 .unlockedBy("has_item", has(ItemRegistry.BLANK_TICKET.get())).save(consumer);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.NAGINATA.get())
+		.pattern("  J")
+		.pattern(" L ")
+        .pattern("A  ")
+        .define('A', Tags.Items.RODS_WOODEN)
+        .define('L', Items.LIGHTNING_ROD)
+        .define('J', ItemRegistry.HORSESHOE_RAINBOW.get())
+        .unlockedBy("has_item", has(ItemRegistry.HORSESHOE_RAINBOW.get())).save(consumer);
+        
+        ShapedRecipeBuilder.shaped(RecipeCategory.COMBAT, ItemRegistry.BASEBALL_BAT.get())
+		.pattern("  A")
+		.pattern("JA ")
+        .pattern("L  ")
+        .define('A', Tags.Items.STORAGE_BLOCKS_IRON)
+        .define('L', Tags.Items.INGOTS_IRON)
+        .define('J', ItemRegistry.HORSESHOE_SILVER.get())
+        .unlockedBy("has_item", has(ItemRegistry.HORSESHOE_RAINBOW.get())).save(consumer);
+        
         ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, BlockRegistry.UMA_SELECT_BLOCK.get()).pattern(" J ").pattern("BLB").pattern("AAA")
         .define('A', Tags.Items.GEMS_DIAMOND)
         .define('B', Items.NETHER_STAR).define('L', Items.LECTERN)

@@ -19,13 +19,17 @@ import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.tracen.umapyoi.Umapyoi;
+import net.tracen.umapyoi.data.builtin.CostumeDataRegistry;
 import net.tracen.umapyoi.data.builtin.SupportCardRegistry;
 import net.tracen.umapyoi.data.builtin.UmaDataRegistry;
+import net.tracen.umapyoi.data.compat.BetterCombatProvider;
+import net.tracen.umapyoi.data.compat.TFCFoodDataProvider;
 import net.tracen.umapyoi.data.loot.UmapyoiBlockLoot;
 import net.tracen.umapyoi.data.tag.UmaDataTagProvider;
 import net.tracen.umapyoi.data.tag.UmapyoiBlockTagProvider;
 import net.tracen.umapyoi.data.tag.UmapyoiItemTagsProvider;
 import net.tracen.umapyoi.data.tag.UmapyoiPOITagsProvider;
+import net.tracen.umapyoi.registry.cosmetics.CosmeticData;
 import net.tracen.umapyoi.registry.training.card.SupportCard;
 import net.tracen.umapyoi.registry.umadata.UmaData;
 
@@ -41,12 +45,16 @@ public class DataGen {
         dataGenerator.addProvider(event.includeClient(), new UmapyoiBlockStateProvider(packOutput, existingFileHelper));
         dataGenerator.addProvider(event.includeClient(), new UmapyoiItemModelProvider(packOutput, existingFileHelper));
         dataGenerator.addProvider(event.includeClient(), new UmapyoiLangProvider(packOutput));
-
+        dataGenerator.addProvider(event.includeServer(), new BetterCombatProvider(packOutput, existingFileHelper));
+        dataGenerator.addProvider(event.includeServer(), new TFCFoodDataProvider(packOutput, existingFileHelper));
         final RegistrySetBuilder umaDataBuilder = new RegistrySetBuilder().add(UmaData.REGISTRY_KEY,
                 UmaDataRegistry::registerAll);
 
         final RegistrySetBuilder supportCardBuilder = new RegistrySetBuilder().add(SupportCard.REGISTRY_KEY,
                 SupportCardRegistry::registerAll);
+        
+        final RegistrySetBuilder CostumeBuilder = new RegistrySetBuilder().add(CosmeticData.REGISTRY_KEY,
+                CostumeDataRegistry::registerAll);
 
         dataGenerator.addProvider(event.includeServer(),
                 new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, umaDataBuilder, Set.of(Umapyoi.MODID)) {
@@ -65,6 +73,16 @@ public class DataGen {
                         return "SupportCard Registry";
                     }
                 });
+        
+        dataGenerator.addProvider(event.includeServer(), 
+                new DatapackBuiltinEntriesProvider(packOutput, lookupProvider, CostumeBuilder, Set.of(Umapyoi.MODID)) {
+
+                    @Override
+                    public String getName() {
+                        return "Costume Registry";
+                    }
+                });
+
 
         UmapyoiBlockTagProvider blockTagProvider = new UmapyoiBlockTagProvider(packOutput, lookupProvider,
                 existingFileHelper);

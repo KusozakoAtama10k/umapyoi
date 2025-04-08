@@ -9,13 +9,13 @@
       "item": "umapyoi:blank_ticket"
     },
     "L": {
-      "item": "minecraft:blast_furnace"
+      "item": "minecraft:lectern"
     }
   },
   "pattern": [
     " J ",
-    "ALA",
-    "AAA"
+    " A ",
+    "ALA"
   ],
   "result": {
     "item": "umapyoi:disassembly_block"

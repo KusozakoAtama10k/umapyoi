@@ -16,6 +16,7 @@ import net.tracen.umapyoi.client.SkillOverlay;
 import net.tracen.umapyoi.client.key.SkillKeyMapping;
 import net.tracen.umapyoi.client.renderer.SwimsuitRenderer;
 import net.tracen.umapyoi.client.renderer.TrainningSuitRenderer;
+import net.tracen.umapyoi.client.renderer.UmaCostumeRenderer;
 import net.tracen.umapyoi.client.renderer.UmaSoulRenderer;
 import net.tracen.umapyoi.client.renderer.UmaUniformRenderer;
 import net.tracen.umapyoi.client.renderer.blockentity.SilverSupportAlbumPedestalBlockRender;
@@ -43,6 +44,8 @@ public class ClientSetupEvents {
             CuriosRendererRegistry.register(ItemRegistry.SWIMSUIT.get(),
                     SwimsuitRenderer::new);
 
+            CuriosRendererRegistry.register(ItemRegistry.UMA_COSTUME.get(),
+                    UmaCostumeRenderer::new);
         });
 
         BlockEntityRenderers.register(BlockEntityRegistry.THREE_GODDESS.get(), ThreeGoddessBlockRender::new);

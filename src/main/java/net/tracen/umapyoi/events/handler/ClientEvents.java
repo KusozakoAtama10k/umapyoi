@@ -20,7 +20,9 @@ import net.minecraftforge.fml.common.Mod;
 import net.tracen.umapyoi.UmapyoiConfig;
 import net.tracen.umapyoi.api.UmapyoiAPI;
 import net.tracen.umapyoi.client.model.UmaPlayerModel;
+import net.tracen.umapyoi.data.tag.UmapyoiItemTags;
 import net.tracen.umapyoi.events.client.RenderingUmaSoulEvent;
+import net.tracen.umapyoi.utils.ClientUtils;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
@@ -54,8 +56,10 @@ public class ClientEvents {
                 armor = NonNullList.create();
                 for (int i = 0; i < player.getInventory().armor.size(); ++i) {
                     armor.add(player.getInventory().armor.get(i).copy());
-                    if (UmapyoiConfig.ELYTRA_RENDER.get()
-                            && player.getInventory().armor.get(i).getItem() instanceof ElytraItem)
+                    boolean renderElytry = UmapyoiConfig.ELYTRA_RENDER.get()
+                            && player.getInventory().armor.get(i).getItem() instanceof ElytraItem;
+                    boolean shouldRender = player.getInventory().armor.get(i).is(UmapyoiItemTags.SHOULD_RENDER);
+					if (renderElytry || shouldRender)
                         player.getInventory().armor.set(i, player.getInventory().armor.get(i));
                     else
                         player.getInventory().armor.set(i, ItemStack.EMPTY);
@@ -94,17 +98,30 @@ public class ClientEvents {
             baseModel.crouching = false;
             baseModel.swimAmount = 0.0F;
             baseModel.setupAnim(event.getPlayer(), 0.0F, 0.0F, 0.0F, 0.0F, 0.0F);
+
             if (event.getArm() == HumanoidArm.RIGHT) {
                 baseModel.rightArm.xRot = 0.0F;
                 baseModel.rightArm.x -=1F;
                 baseModel.rightArm.render(event.getPoseStack(), vertexconsumer, event.getPackedLight(),
                         OverlayTexture.NO_OVERLAY);
+                if(baseModel.isEmissive()) {
+                    VertexConsumer emissiveConsumer = event.getMultiBufferSource()
+                            .getBuffer(RenderType.entityTranslucentEmissive(ClientUtils.getEmissiveTexture(name)));
+                    baseModel.rightArm.renderEmissive(event.getPoseStack(), emissiveConsumer, event.getPackedLight(),
+                            OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                }
                 baseModel.rightArm.x +=1F;
             } else {
                 baseModel.leftArm.xRot = 0.0F;
                 baseModel.leftArm.x +=1F;
                 baseModel.leftArm.render(event.getPoseStack(), vertexconsumer, event.getPackedLight(),
                         OverlayTexture.NO_OVERLAY);
+                if(baseModel.isEmissive()) {
+                    VertexConsumer emissiveConsumer = event.getMultiBufferSource()
+                            .getBuffer(RenderType.entityTranslucentEmissive(ClientUtils.getEmissiveTexture(name)));
+                    baseModel.leftArm.renderEmissive(event.getPoseStack(), emissiveConsumer, event.getPackedLight(),
+                            OverlayTexture.NO_OVERLAY, 1, 1, 1, 1);
+                }
                 baseModel.leftArm.x -=1F;
             }
             event.setCanceled(true);

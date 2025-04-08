@@ -84,6 +84,7 @@ public class JEIPlugin implements IModPlugin {
                 UmapyoiJEIRecipes.gachaSupportCard(Ingredient.of(UmapyoiItemTags.SSR_CARD_TICKET), GachaRanking.SSR));
     }
 
+
     @Override
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(ItemRegistry.DISASSEMBLY_BLOCK.get().getDefaultInstance(), DISASSEMBLY_JEI_TYPE);
