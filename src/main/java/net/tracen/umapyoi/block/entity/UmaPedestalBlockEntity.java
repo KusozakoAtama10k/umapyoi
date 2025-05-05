@@ -224,6 +224,10 @@ public class UmaPedestalBlockEntity extends SyncedBlockEntity implements Gachabl
             protected void onContentsChanged(int slot) {
                 inventoryChanged();
             }
+            @Override
+            public int getSlotLimit(int slot) {
+            	return 1;
+            }
         };
     }
 

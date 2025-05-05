@@ -305,7 +305,8 @@
   
   "item.umapyoi.common_costume.name": "白色T恤",
   "item.umapyoi.kindergarten_uniform.name": "幼儿园服饰",
-  "item.umapyoi.starting_futute.name": "Starting Future",
+  "item.umapyoi.starting_future.name": "Starting Future",
+  "item.umapyoi.kasamatsu_training_uniform.name": "笠松特雷森训练服",
   
   "tooltip.umapyoi.umafactor.data": "拥有%s（等）总共%d个因子",
   "tooltip.umapyoi.uma_soul.ranking": "评级：%s",

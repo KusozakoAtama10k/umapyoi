@@ -22,7 +22,7 @@ mixin {
     debug.export = true
 }
 
-version = '1.8.48-1.20.1'
+version = '1.9.49-1.20.1'
 group = 'net.tracen' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'umapyoi'
 
@@ -127,11 +127,6 @@ repositories {
     // Patchouli
     maven { url = 'https://maven.blamejared.com' }
 
-    //maven {
-      // location of a maven mirror for JEI files, as a fallback
-      //name = "ModMaven"
-      //url = "https://modmaven.dev"
-    //}
     maven {
         url = "https://api.modrinth.com/maven"
     }
@@ -142,7 +137,7 @@ dependencies {
     // Apply Mixin AP
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 
-    implementation fg.deobf("cn.mcmod_mmf.mysterious_mountain_lib:MMLib:1.4.12-1.20.1")
+    implementation fg.deobf("cn.mcmod_mmf.mysterious_mountain_lib:MMLib:1.5.21-1.20.1")
     // Compile against only the API artifact
     compileOnly(fg.deobf("top.theillusivec4.curios:curios-forge:5.4.5+1.20.1:api"))
     // Use the full Curios API jar at runtime

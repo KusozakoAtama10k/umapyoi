@@ -4,6 +4,7 @@ import java.util.function.Supplier;
 
 import cn.mcmod_mmf.mmlib.item.info.FoodInfo;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.item.DoubleHighBlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -29,10 +30,10 @@ public class ItemRegistry {
             () -> new BlockItem(BlockRegistry.UMA_PEDESTAL.get(), Umapyoi.defaultItemProperties()));
 
     public static final RegistryObject<Item> UMA_STATUE = register("uma_statue",
-            () -> new BlockItem(BlockRegistry.UMA_STATUES.get(), Umapyoi.defaultItemProperties()));
+            () -> new DoubleHighBlockItem(BlockRegistry.UMA_STATUES.get(), Umapyoi.defaultItemProperties()));
     
     public static final RegistryObject<Item> THREE_GODDESS = register("three_goddess",
-            () -> new BlockItem(BlockRegistry.THREE_GODDESS.get(), Umapyoi.defaultItemProperties()));
+            () -> new DoubleHighBlockItem(BlockRegistry.THREE_GODDESS.get(), Umapyoi.defaultItemProperties()));
 
     public static final RegistryObject<Item> TRAINING_FACILITY = register("training_facility",
             () -> new BlockItem(BlockRegistry.TRAINING_FACILITY.get(), Umapyoi.defaultItemProperties()));

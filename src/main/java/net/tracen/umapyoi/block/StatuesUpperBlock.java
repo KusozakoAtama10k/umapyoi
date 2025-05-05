@@ -8,12 +8,15 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.RenderShape;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -34,8 +37,12 @@ public class StatuesUpperBlock extends Block {
         this.bottomBlock = bottom;
         this.shape = shape;
     }
-
     
+    @Override
+    public PushReaction getPistonPushReaction(BlockState state){
+        return PushReaction.BLOCK;
+    }
+
     @Override
     public Item asItem() {
         return this.bottomBlock.get().asItem();
@@ -59,14 +66,22 @@ public class StatuesUpperBlock extends Block {
     public boolean canSurvive(BlockState pState, LevelReader pLevel, BlockPos pPos) {
         return pLevel.getBlockState(pPos.below()).is(this.getBottomBlock().get());
     }
-
-    @SuppressWarnings("deprecation")
+    
     @Override
-    public void onRemove(BlockState pState, Level pLevel, BlockPos pPos, BlockState pNewState, boolean pIsMoving) {
-        if (pLevel.getBlockState(pPos.below()).is(this.getBottomBlock().get())) {
-            pLevel.destroyBlock(pPos.below(), true);
+    public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, boolean willHarvest,
+    		FluidState fluid) {
+        if (level.getBlockState(pos.below()).is(this.getBottomBlock().get())) {
+            level.destroyBlock(pos.below(), willHarvest);
         }
-        super.onRemove(pState, pLevel, pPos, pNewState, pIsMoving);
+    	return super.onDestroyedByPlayer(state, level, pos, player, willHarvest, fluid);
+    }
+    
+    @Override
+    public void onBlockExploded(BlockState state, Level level, BlockPos pos, Explosion explosion) {
+        if (level.getBlockState(pos.below()).is(this.getBottomBlock().get())) {
+            level.destroyBlock(pos.below(), false);
+        }
+    	super.onBlockExploded(state, level, pos, explosion);
     }
 
     public void neighborChanged(BlockState pState, Level pLevel, BlockPos pPos, Block pBlock, BlockPos pFromPos,

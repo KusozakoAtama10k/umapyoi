@@ -17,6 +17,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.tracen.umapyoi.UmapyoiConfig;
 import net.tracen.umapyoi.events.ApplyUmasoulAttributeEvent;
 import net.tracen.umapyoi.events.ResumeActionPointEvent;
+import net.tracen.umapyoi.events.SettingPropertyEvent;
 import net.tracen.umapyoi.registry.umadata.Growth;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
 import net.tracen.umapyoi.utils.UmaStatusUtils.StatusType;
@@ -75,7 +76,7 @@ public class UmaSoulCuriosWrapper implements ICurio {
     @Override
     public Multimap<Attribute, AttributeModifier> getAttributeModifiers(SlotContext slotContext, UUID uuid) {
         Multimap<Attribute, AttributeModifier> atts = LinkedHashMultimap.create();
-//        slotContext.entity().isSprinting();
+        LivingEntity user = slotContext.entity();
         if (!slotContext.identifier().equalsIgnoreCase("uma_soul"))
             return atts;
         CuriosApi.addSlotModifier(atts, "uma_suit", uuid, 1.0, AttributeModifier.Operation.ADDITION);
@@ -83,34 +84,34 @@ public class UmaSoulCuriosWrapper implements ICurio {
             return atts;
         atts.put(Attributes.MOVEMENT_SPEED,
                 new AttributeModifier(uuid, "speed_running_bonus",
-                        getExactProperty(StatusType.SPEED.getId(), UmapyoiConfig.UMASOUL_MAX_SPEED.get()),
+                        getExactProperty(user, StatusType.SPEED, UmapyoiConfig.UMASOUL_MAX_SPEED.get()),
                         UmapyoiConfig.UMASOUL_SPEED_PRECENT_ENABLE.get() ? AttributeModifier.Operation.MULTIPLY_TOTAL
                                 : AttributeModifier.Operation.ADDITION));
         
         atts.put(ForgeMod.SWIM_SPEED.get(),
                 new AttributeModifier(uuid, "speed_swiming_bonus",
-                        getExactProperty(StatusType.SPEED.getId(), UmapyoiConfig.UMASOUL_MAX_SPEED.get()),
+                        getExactProperty(user, StatusType.SPEED, UmapyoiConfig.UMASOUL_MAX_SPEED.get()),
                         UmapyoiConfig.UMASOUL_SPEED_PRECENT_ENABLE.get() ? AttributeModifier.Operation.MULTIPLY_TOTAL
                                 : AttributeModifier.Operation.ADDITION));
         
         atts.put(Attributes.ATTACK_DAMAGE,
                 new AttributeModifier(uuid, "strength_attack_bonus",
-                        getExactProperty(StatusType.STRENGTH.getId(), UmapyoiConfig.UMASOUL_MAX_STRENGTH_ATTACK.get()),
+                        getExactProperty(user, StatusType.STRENGTH, UmapyoiConfig.UMASOUL_MAX_STRENGTH_ATTACK.get()),
                         UmapyoiConfig.UMASOUL_STRENGTH_PRECENT_ENABLE.get() ? AttributeModifier.Operation.MULTIPLY_TOTAL
                                 : AttributeModifier.Operation.ADDITION));
         atts.put(Attributes.MAX_HEALTH,
                 new AttributeModifier(uuid, "strength_attack_bonus",
-                        getExactProperty(StatusType.STAMINA.getId(), UmapyoiConfig.UMASOUL_MAX_STAMINA_HEALTH.get()),
+                        getExactProperty(user, StatusType.STAMINA, UmapyoiConfig.UMASOUL_MAX_STAMINA_HEALTH.get()),
                         UmapyoiConfig.UMASOUL_STAMINA_PRECENT_ENABLE.get() ? AttributeModifier.Operation.MULTIPLY_TOTAL
                                 : AttributeModifier.Operation.ADDITION));
         atts.put(Attributes.ARMOR,
                 new AttributeModifier(uuid, "guts_armor_bonus",
-                        getExactProperty(StatusType.GUTS.getId(), UmapyoiConfig.UMASOUL_MAX_GUTS_ARMOR.get()),
+                        getExactProperty(user, StatusType.GUTS, UmapyoiConfig.UMASOUL_MAX_GUTS_ARMOR.get()),
                         UmapyoiConfig.UMASOUL_GUTS_PRECENT_ENABLE.get() ? AttributeModifier.Operation.MULTIPLY_TOTAL
                                 : AttributeModifier.Operation.ADDITION));
         atts.put(Attributes.ARMOR_TOUGHNESS,
                 new AttributeModifier(uuid, "guts_armor_toughness_bonus",
-                        getExactProperty(StatusType.GUTS.getId(), UmapyoiConfig.UMASOUL_MAX_GUTS_ARMOR_TOUGHNESS.get()),
+                        getExactProperty(user, StatusType.GUTS, UmapyoiConfig.UMASOUL_MAX_GUTS_ARMOR_TOUGHNESS.get()),
                         UmapyoiConfig.UMASOUL_GUTS_PRECENT_ENABLE.get() ? AttributeModifier.Operation.MULTIPLY_TOTAL
                                 : AttributeModifier.Operation.ADDITION));
         ApplyUmasoulAttributeEvent event = new ApplyUmasoulAttributeEvent(this.getStack(), slotContext, uuid, atts);
@@ -118,11 +119,14 @@ public class UmaSoulCuriosWrapper implements ICurio {
         return event.getAttributes();
     }
 
-    public double getExactProperty(int num, double limit) {
+    public double getExactProperty(LivingEntity user, StatusType status, double limit) {
+    	int num = status.getId();
         var retiredValue = UmaSoulUtils.getGrowth(getStack()) == Growth.RETIRED ? 1.0D : 0.25D;
         var propertyRate = 1.0D + (UmaSoulUtils.getPropertyRate(this.getStack())[num] / 100.0D);
         var totalProperty = propertyPercentage(num);
-        return UmaSoulUtils.getMotivation(this.getStack()).getMultiplier() * limit * propertyRate * retiredValue * totalProperty;
+        SettingPropertyEvent event = new SettingPropertyEvent(user, this.getStack(), retiredValue, propertyRate, totalProperty);
+        MinecraftForge.EVENT_BUS.post(event);
+        return event.getResultProperty() * limit;
     }
 
     private double propertyPercentage(int num) {
@@ -130,7 +134,8 @@ public class UmaSoulCuriosWrapper implements ICurio {
         var statLimit = UmapyoiConfig.STAT_LIMIT_VALUE.get();
         var denominator = 1 + Math.pow(Math.E, 
                 (x > statLimit ? (-0.125 * UmapyoiConfig.STAT_LIMIT_REDUCTION_RATE.get()) : -0.125) * 
-                (x - statLimit));
+                (x - statLimit)
+                );
         return 1 / denominator;
     }
 }

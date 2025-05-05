@@ -35,7 +35,7 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         add(ItemRegistry.HACHIMI_MID.get(), "Hachimi Drink");
         add(ItemRegistry.HACHIMI_BIG.get(), "Hachimi Extreme");
         add(ItemRegistry.ROYAL_BITTER.get(), "Royal BitterJuice");
-        add(ItemRegistry.JEWEL.get(), "Carrot Jewel");
+        add(ItemRegistry.JEWEL.get(), "Carat");
 
         add(ItemRegistry.CUPCAKE.get(), "Plain Cupcake");
         add(ItemRegistry.SWEET_CUPCAKE.get(), "Sweet Cupcake");
@@ -43,13 +43,14 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         add(ItemRegistry.UMA_SOUL.get(), "Umamusume Soul");
         add(ItemRegistry.UMA_FACTOR_ITEM.get(), "Umamusume Wish");
 
-        add(ItemRegistry.TRAINNING_SUIT.get(), "Tracen Training Suit");
+        add(ItemRegistry.TRAINNING_SUIT.get(), "Tracen Training Uniform");
         add(ItemRegistry.SUMMER_UNIFORM.get(), "Tracen Summer Uniform");
         add(ItemRegistry.WINTER_UNIFORM.get(), "Tracen Winter Uniform");
         
         addCostume(CostumeDataRegistry.COMMON_COSTUME, "White T-Shirt");
         addCostume(CostumeDataRegistry.STARTING_FUTURE, "Starting Future Costume");
         addCostume(CostumeDataRegistry.KINDERGARTEN_UNIFORM, "Kindergarten Uniform");
+        addCostume(CostumeDataRegistry.KASAMATSU_TRAINING_UNIFORM, "Kasamatsu Tracen Training Uniform");
 
         add(ItemRegistry.SPEED_LOW_ITEM.get(), "Speed Notepad");
         add(ItemRegistry.SPEED_MID_ITEM.get(), "Speed Writings");
@@ -219,7 +220,7 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         add("key.category.umapyoi", "Umapyoi");
         add("key.umapyoi.use_skill", "Use Skill");
         add("key.umapyoi.select_former_skill", "Select Former Skill");
-        add("key.umapyoi.select_latter_skill", "Select Former Skill");
+        add("key.umapyoi.select_latter_skill", "Select Latter Skill");
 
         add("umapyoi.skill.no_require", "Nothing required.");
         add("umapyoi.skill.require_wisdom", "%s wisdom required.");

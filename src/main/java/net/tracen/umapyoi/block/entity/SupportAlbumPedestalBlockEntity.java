@@ -303,6 +303,10 @@ public class SupportAlbumPedestalBlockEntity extends SyncedBlockEntity implement
             protected void onContentsChanged(int slot) {
                 inventoryChanged();
             }
+            @Override
+            public int getSlotLimit(int slot) {
+            	return 1;
+            }
         };
     }
 

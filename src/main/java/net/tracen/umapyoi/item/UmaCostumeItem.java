@@ -33,11 +33,10 @@ public class UmaCostumeItem extends Item {
 
     @Override
     public String getDescriptionId(ItemStack pStack) {
-        return Util.makeDescriptionId("item", this.getCostumeID(pStack)) + ".name";
+        return Util.makeDescriptionId("item", UmaCostumeItem.getCostumeID(pStack)) + ".name";
     }
 
-    
-    private ResourceLocation getCostumeID(ItemStack stack) {
+    public static ResourceLocation getCostumeID(ItemStack stack) {
         if (stack.getOrCreateTag().contains("cosmetic"))
             return ResourceLocation.tryParse(stack.getOrCreateTag().getString("cosmetic"));
         return CosmeticData.COMMON_COSTUME;

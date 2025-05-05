@@ -29,6 +29,8 @@ public class UmaStatuesBlockRender implements BlockEntityRenderer<UmaStatueBlock
     public UmaStatuesBlockRender(BlockEntityRendererProvider.Context context) {
         model = new SimpleBedrockModel();
     }
+    
+    
 
     @Override
     public void render(UmaStatueBlockEntity tileEntity, float partialTicks, PoseStack poseStack,

@@ -235,6 +235,10 @@ public class ThreeGoddessBlockEntity extends SyncedBlockEntity implements MenuPr
                 inventoryChanged();
             }
             @Override
+            public int getSlotLimit(int slot) {
+            	return 1;
+            }
+            @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
                 if(slot == 0) {
                     if (stack.is(ItemRegistry.BLANK_UMA_SOUL.get())) {

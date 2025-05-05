@@ -10,8 +10,10 @@ public class CostumeDataRegistry {
 
 	
 	public static final ResourceKey<CosmeticData> COMMON_COSTUME = register("common_costume");
-	public static final ResourceKey<CosmeticData> STARTING_FUTURE = register("starting_futute");
+	public static final ResourceKey<CosmeticData> STARTING_FUTURE = register("starting_future");
+	
 	public static final ResourceKey<CosmeticData> KINDERGARTEN_UNIFORM = register("kindergarten_uniform");
+	public static final ResourceKey<CosmeticData> KASAMATSU_TRAINING_UNIFORM = register("kasamatsu_training_uniform");
 
 	public static void registerAll(BootstapContext<CosmeticData> bootstrap) {
 
@@ -22,6 +24,14 @@ public class CostumeDataRegistry {
 				new ResourceLocation(Umapyoi.MODID, "common_uma"),
 				new ResourceLocation(Umapyoi.MODID, "common_uma_flat")
 				));
+		
+		bootstrap.register(KASAMATSU_TRAINING_UNIFORM, new CosmeticData(
+				new ResourceLocation(Umapyoi.MODID, "kasamatsu_training_uniform"), 
+				new ResourceLocation(Umapyoi.MODID, "kasamatsu_training_uniform_flat"),
+				new ResourceLocation(Umapyoi.MODID, "kasamatsu_training_uniform"),
+				new ResourceLocation(Umapyoi.MODID, "kasamatsu_training_uniform")
+				));
+		
 		bootstrap.register(KINDERGARTEN_UNIFORM, new CosmeticData(new ResourceLocation(Umapyoi.MODID, "kindergarten_uniform")));
 
 	}

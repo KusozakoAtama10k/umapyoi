@@ -303,6 +303,10 @@ public class SilverSupportAlbumPedestalBlockEntity extends SyncedBlockEntity imp
             protected void onContentsChanged(int slot) {
                 inventoryChanged();
             }
+            @Override
+            public int getSlotLimit(int slot) {
+            	return 1;
+            }
         };
     }
 
