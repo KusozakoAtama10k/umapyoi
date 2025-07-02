@@ -55,7 +55,7 @@ public class ClientSetupEvents {
 
 			CuriosRendererRegistry.register(ItemRegistry.UMA_COSTUME.get(), UmaCostumeRenderer::new);
 		});
-
+		event.enqueueWork(() -> {
 		BlockEntityRenderers.register(BlockEntityRegistry.THREE_GODDESS.get(), ThreeGoddessBlockRender::new);
 		BlockEntityRenderers.register(BlockEntityRegistry.UMA_PEDESTAL.get(), UmaPedestalBlockRender::new);
 		BlockEntityRenderers.register(BlockEntityRegistry.SUPPORT_ALBUM_PEDESTAL.get(),
@@ -65,7 +65,7 @@ public class ClientSetupEvents {
 		BlockEntityRenderers.register(BlockEntityRegistry.SILVER_UMA_PEDESTAL.get(), SilverUmaPedestalBlockRender::new);
 		BlockEntityRenderers.register(BlockEntityRegistry.SILVER_SUPPORT_ALBUM_PEDESTAL.get(),
 				SilverSupportAlbumPedestalBlockRender::new);
-
+		});
 	}
 
 	@SubscribeEvent

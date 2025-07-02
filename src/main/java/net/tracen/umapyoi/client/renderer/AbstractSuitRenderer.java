@@ -27,7 +27,11 @@ public abstract class AbstractSuitRenderer implements ICurioRenderer {
 
     private final UmaPlayerModel<LivingEntity> baseModel;
 
-    public AbstractSuitRenderer() {
+    public UmaPlayerModel<LivingEntity> getBaseModel() {
+		return baseModel;
+	}
+
+	public AbstractSuitRenderer() {
         baseModel = new UmaPlayerModel<>();
     }
 
@@ -69,14 +73,13 @@ public abstract class AbstractSuitRenderer implements ICurioRenderer {
                 var pojo = ClientUtil.getModelPOJO(flat_flag ? getFlatModel(stack) : getModel(stack));
                 if (baseModel.needRefresh(pojo))
                     baseModel.loadModel(pojo);
-                if (MinecraftForge.EVENT_BUS.post(new RenderingUmaSuitEvent.Pre(entity, baseModel, partialTicks,
-                        matrixStack, renderTypeBuffer, light)))
-                    return;
                 baseModel.setModelProperties(entity);
                 baseModel.head.visible = false;
                 baseModel.tail.visible = false;
-                baseModel.hat.visible = false;
                 baseModel.prepareMobModel(entity, limbSwing, limbSwingAmount, partialTicks);
+                if (MinecraftForge.EVENT_BUS.post(new RenderingUmaSuitEvent.Pre(entity, baseModel, partialTicks,
+                        matrixStack, renderTypeBuffer, light)))
+                    return;
 
                 if (renderLayerParent.getModel() instanceof HumanoidModel) {
                     @SuppressWarnings("unchecked")

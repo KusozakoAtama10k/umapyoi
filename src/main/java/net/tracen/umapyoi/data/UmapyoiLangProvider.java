@@ -399,6 +399,9 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         
         addUma(UmaDataRegistry.FUSAICHI_PANDORA, "Fusaichi Pandora");
         
+        addUma(UmaDataRegistry.MEJIRO_RYAN, "Mejiro Ryan");
+        addUma(UmaDataRegistry.TYCHE, "Tyche");
+        
         add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "super_creek")), "Super Creek");
         add(Util.makeDescriptionId("umadata", new ResourceLocation(Umapyoi.MODID, "mejiro_ramonu")), "Mejiro Ramonu");
         

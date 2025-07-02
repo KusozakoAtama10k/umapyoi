@@ -47,11 +47,15 @@ public class ClientEvents {
             model.setAllVisible(false);
             model.head.visible = true;
             model.tail.visible = true;
-            model.hat.visible = true;
+            if(UmapyoiAPI.isUmaSuitHasHat(entity)) 
+            	model.hideHat();
+            else
+            	model.showHat();
+            
         } else {
             model.setAllVisible(true);
         }
-
+        model.showEars();
     }
     
     @SubscribeEvent

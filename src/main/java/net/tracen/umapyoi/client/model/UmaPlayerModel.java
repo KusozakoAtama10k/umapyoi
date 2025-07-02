@@ -38,7 +38,7 @@ public class UmaPlayerModel<T extends LivingEntity> extends BedrockHumanoidModel
     public BedrockPart leftFoot;
     public BedrockPart rightLegHideParts;
     public BedrockPart leftLegHideParts;
-    public BedrockPart hat;
+    public BedrockPart hat = new BedrockPart();
     public BedrockPart hideParts;
     public BedrockPart tail;
     public BedrockPart tailDown;
@@ -195,9 +195,9 @@ public class UmaPlayerModel<T extends LivingEntity> extends BedrockHumanoidModel
             if (UmapyoiConfig.VANILLA_ARMOR_RENDER.get() && !UmapyoiConfig.HIDE_PARTS_RENDER.get()) {
                 
                 if (!player.getItemBySlot(EquipmentSlot.HEAD).isEmpty()) {
-                    this.hat.visible = false;
+                    this.hideHat();
                 }else {
-                    this.hat.visible = true;
+                    this.showHat();
                 }
 
                 if (!player.getItemBySlot(EquipmentSlot.CHEST).isEmpty()
@@ -226,18 +226,29 @@ public class UmaPlayerModel<T extends LivingEntity> extends BedrockHumanoidModel
                 }
             }
             
-            if (this.hat.visible) {
-                if (this.leftEarHideParts != null && !this.leftEarHideParts.isEmpty())
-                    this.leftEar.visible = false;
-                if (this.rightEarHideParts != null && !this.rightEarHideParts.isEmpty())
-                    this.rightEar.visible = false;
-            } else {
-                if (this.leftEarHideParts != null && !this.leftEarHideParts.isEmpty())
-                    this.leftEar.visible = true;
-                if (this.rightEarHideParts != null && !this.rightEarHideParts.isEmpty())
-                    this.rightEar.visible = true;
-            }
+            this.showEars();
         }
+    }
+
+	public void showEars() {
+		if (this.hat.visible) {
+		    if (this.leftEarHideParts != null && !this.leftEarHideParts.isEmpty())
+		        this.leftEar.visible = false;
+		    if (this.rightEarHideParts != null && !this.rightEarHideParts.isEmpty())
+		        this.rightEar.visible = false;
+		} else {
+		    if (this.leftEarHideParts != null && !this.leftEarHideParts.isEmpty())
+		        this.leftEar.visible = true;
+		    if (this.rightEarHideParts != null && !this.rightEarHideParts.isEmpty())
+		        this.rightEar.visible = true;
+		}
+	}
+    
+    @Override
+    public void setAllVisible(boolean pVisible) {
+        super.setAllVisible(pVisible);
+        this.hat.visible = pVisible;
+        this.tail.visible = pVisible;
     }
 
     public void copyAnim(BedrockPart part, ModelPart old_part) {
@@ -267,6 +278,6 @@ public class UmaPlayerModel<T extends LivingEntity> extends BedrockHumanoidModel
     }
     
     public void hideHat() {
-        this.hat.visible = true;
+        this.hat.visible = false;
     }
 }

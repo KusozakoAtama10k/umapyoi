@@ -1,5 +1,7 @@
 package net.tracen.umapyoi.api;
 
+import java.util.Optional;
+
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
@@ -8,6 +10,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.tracen.umapyoi.client.renderer.AbstractSuitRenderer;
 import net.tracen.umapyoi.item.UmaCostumeItem;
 import net.tracen.umapyoi.item.UmaSoulItem;
 import net.tracen.umapyoi.item.UmaSuitItem;
@@ -17,6 +20,8 @@ import net.tracen.umapyoi.registry.umadata.UmaData;
 import net.tracen.umapyoi.utils.ClientUtils;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
 import top.theillusivec4.curios.api.CuriosApi;
+import top.theillusivec4.curios.api.client.CuriosRendererRegistry;
+import top.theillusivec4.curios.api.client.ICurioRenderer;
 import top.theillusivec4.curios.api.type.inventory.IDynamicStackHandler;
 
 public class UmapyoiAPI {
@@ -97,6 +102,16 @@ public class UmapyoiAPI {
                     return stacksHandler.getRenders().get(0);
                 }
             }
+        }
+        return false;
+    }
+    
+    public static boolean isUmaSuitHasHat(LivingEntity player) {
+        Optional<ICurioRenderer> renderer = CuriosRendererRegistry.getRenderer(UmapyoiAPI.getUmaSuit(player).getItem());
+		if (renderer.isPresent()) {
+           if(renderer.get() instanceof AbstractSuitRenderer suit) {
+        	   return !suit.getBaseModel().getChild("hat").isEmpty();
+           }
         }
         return false;
     }
