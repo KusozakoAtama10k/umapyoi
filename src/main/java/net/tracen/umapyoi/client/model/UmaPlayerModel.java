@@ -44,7 +44,7 @@ public class UmaPlayerModel<T extends LivingEntity> extends BedrockHumanoidModel
     public BedrockPart tailDown;
     
     public BedrockPart cape;
-    public List<BedrockPart> longHairParts;
+    public List<BedrockPart> longHairParts = Lists.newArrayList();
     public UmaPlayerModel() {
         super();
     }

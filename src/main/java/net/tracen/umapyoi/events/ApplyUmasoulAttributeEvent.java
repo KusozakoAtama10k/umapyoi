@@ -7,16 +7,14 @@ import com.google.common.collect.Multimap;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.eventbus.api.Event;
 import top.theillusivec4.curios.api.SlotContext;
 
-public class ApplyUmasoulAttributeEvent extends Event {
-	private final ItemStack soul;
+public class ApplyUmasoulAttributeEvent extends UmaSoulEvent {
 	private final SlotContext slotContext;
 	private final UUID uuid;
 	private final Multimap<Attribute, AttributeModifier> atts;
 	public ApplyUmasoulAttributeEvent(ItemStack soul, SlotContext slotContext, UUID uuid, Multimap<Attribute, AttributeModifier> atts) {
-		this.soul = soul;
+		super(soul);
 		this.uuid = uuid;
 		this.slotContext = slotContext;
 		this.atts = atts;
@@ -34,8 +32,9 @@ public class ApplyUmasoulAttributeEvent extends Event {
 		return atts;
 	}
 
-	public ItemStack getUmaSoul() {
-		return soul;
+	@Override
+	public void setUmaSoul(ItemStack soul) {
+		throw new UnsupportedOperationException("Tried to set a new soul for ApplyUmasoulAttributeEvent");
 	}
 
 }

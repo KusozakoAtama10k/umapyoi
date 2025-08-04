@@ -27,7 +27,47 @@ public class AnvilEvents {
         byerleySoul(event, soul, material);
         godolphinSoul(event, soul, material);
         miyaSoul(event, soul, material);
+        tycheSoul(event, soul, material);
+        suzunaSoul(event, soul, material);
     }
+    
+    private static void suzunaSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+        if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
+        if(!material.is(Items.DIAMOND_SWORD)) return;
+        if(!event.getName().equalsIgnoreCase("priconne")) return;
+        var registry = UmapyoiAPI.getUmaDataRegistry(event.getPlayer().level());
+        ResourceLocation name = soul.getOrCreateTag().contains("name") ?
+                ResourceLocation.tryParse(soul.getOrCreateTag().getString("name")) : UmaDataRegistry.COMMON_UMA.location();
+        if(!registry.containsKey(name) || registry.get(name).getGachaRanking() != GachaRanking.R) return;
+        
+        var id = UmaDataRegistry.SHENONE_SUZUNA.location();
+        if(!registry.containsKey(id)) return;
+        ItemStack egg = ItemRegistry.BLANK_UMA_SOUL.get().getDefaultInstance();
+        egg.getOrCreateTag().putString("name", id.toString());
+
+        event.setMaterialCost(1);
+        event.setCost(5);
+        event.setOutput(egg.copy());
+    }
+    
+    private static void tycheSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+        if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
+        if(!event.getName().equalsIgnoreCase("tyche")) return;
+        if(!material.is(Tags.Items.FEATHERS)) return;
+        var registry = UmapyoiAPI.getUmaDataRegistry(event.getPlayer().level());
+        ResourceLocation name = soul.getOrCreateTag().contains("name") ?
+                ResourceLocation.tryParse(soul.getOrCreateTag().getString("name")) : UmaDataRegistry.COMMON_UMA.location();
+        if(!registry.containsKey(name) || !registry.get(name).getIdentifier().equals(UmaDataRegistry.COMMON_UMA.location())) return;
+        
+        var id = UmaDataRegistry.TYCHE.location();
+        if(!registry.containsKey(id)) return;
+        ItemStack egg = ItemRegistry.BLANK_UMA_SOUL.get().getDefaultInstance();
+        egg.getOrCreateTag().putString("name", id.toString());
+
+        event.setMaterialCost(1);
+        event.setCost(5);
+        event.setOutput(egg.copy());
+	}
 
     private static void miyaSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
@@ -47,7 +87,7 @@ public class AnvilEvents {
         event.setOutput(egg.copy());
 	}
 
-	public static void venusParkSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+    private static void venusParkSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
         if(!material.is(UmapyoiItemTags.BREAD)) return;
         if(!event.getName().equalsIgnoreCase("vivelafrance")) return;
@@ -67,7 +107,7 @@ public class AnvilEvents {
         event.setOutput(egg.copy());
     }
     
-    public static void zhengSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+    private static void zhengSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
         if(!material.is(Tags.Items.FEATHERS)) return;
         
@@ -88,7 +128,7 @@ public class AnvilEvents {
         event.setOutput(egg.copy());
     }
     
-    public static void dumnheintSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+    private static void dumnheintSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
         if(!material.is(Items.LAVA_BUCKET)) return;
         if(!event.getName().equalsIgnoreCase("cinnabar")) return;
@@ -107,7 +147,7 @@ public class AnvilEvents {
         event.setOutput(egg.copy());
     }
     
-    public static void darleySoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+    private static void darleySoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
         if(!material.is(ItemRegistry.THREE_GODDESS.get())) return;
         
@@ -125,7 +165,7 @@ public class AnvilEvents {
         event.setOutput(egg.copy());
     }
     
-    public static void byerleySoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+    private static void byerleySoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
         if(!material.is(ItemRegistry.THREE_GODDESS.get())) return;
         
@@ -143,7 +183,7 @@ public class AnvilEvents {
         event.setOutput(egg.copy());
     }
     
-    public static void godolphinSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
+    private static void godolphinSoul(AnvilUpdateEvent event, ItemStack soul, ItemStack material) {
         if(!soul.is(ItemRegistry.BLANK_UMA_SOUL.get())) return;
         if(!material.is(ItemRegistry.THREE_GODDESS.get())) return;
         

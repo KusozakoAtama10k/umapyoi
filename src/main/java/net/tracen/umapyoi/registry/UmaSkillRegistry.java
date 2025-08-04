@@ -18,6 +18,7 @@ import net.tracen.umapyoi.registry.skills.SereneSkill;
 import net.tracen.umapyoi.registry.skills.SkillType;
 import net.tracen.umapyoi.registry.skills.SpeedSkill;
 import net.tracen.umapyoi.registry.skills.SteelWillSkill;
+import net.tracen.umapyoi.registry.skills.TetherSkill;
 import net.tracen.umapyoi.registry.skills.TopUmamusumeSkill;
 import net.tracen.umapyoi.registry.skills.UmaSkill;
 import net.tracen.umapyoi.registry.skills.passive.PassiveSkill;
@@ -91,4 +92,9 @@ public class UmaSkillRegistry {
     
     public static final RegistryObject<UmaSkill> INQUISITIVE_MIND = SKILLS.register("inquisitive_mind",
             () -> new PassiveSkill(new UmaSkill.Builder().level(1).requiredWisdom(2)));
+    
+    public static final RegistryObject<UmaSkill> TETHER = SKILLS.register("tether",
+            () -> new TetherSkill(new UmaSkill.Builder().level(1).upperSkill(new ResourceLocation(Umapyoi.MODID, "dominator")).type(SkillType.HINDER).actionPoint(400).requiredWisdom(2)));
+    public static final RegistryObject<UmaSkill> DOMINATOR = SKILLS.register("dominator",
+            () -> new TetherSkill(new UmaSkill.Builder().level(2).type(SkillType.HINDER).actionPoint(900).requiredWisdom(4)));
 }

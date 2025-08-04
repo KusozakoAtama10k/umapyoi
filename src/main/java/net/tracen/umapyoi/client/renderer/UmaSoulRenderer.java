@@ -19,6 +19,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.tracen.umapyoi.client.model.UmaPlayerModel;
 import net.tracen.umapyoi.data.tag.UmapyoiUmaDataTags;
 import net.tracen.umapyoi.events.client.RenderingUmaSoulEvent;
+import net.tracen.umapyoi.item.UmaCostumeItem;
 import net.tracen.umapyoi.item.UmaSuitItem;
 import net.tracen.umapyoi.registry.umadata.UmaData;
 import net.tracen.umapyoi.utils.ClientUtils;
@@ -94,7 +95,8 @@ public class UmaSoulRenderer implements ICurioRenderer {
                 var stacksHandler = itemHandler.getStacksHandler("uma_suit").orElse(null);
                 IDynamicStackHandler stackHandler = stacksHandler.getStacks();
                 
-                if (stackHandler.getSlots() > 0 && stackHandler.getStackInSlot(0).getItem() instanceof UmaSuitItem) {
+                if (stackHandler.getSlots() > 0 && (stackHandler.getStackInSlot(0).getItem() instanceof UmaSuitItem || 
+                		stackHandler.getStackInSlot(0).getItem() instanceof UmaCostumeItem)) {
                     suit_flag = stacksHandler.getRenders().get(0);
                     
                     alter_flag = ClientUtils.getClientUmaDataRegistry()

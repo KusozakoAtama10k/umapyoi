@@ -11,6 +11,7 @@ import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.texture.OverlayTexture;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.EquipmentSlot.Type;
@@ -28,8 +29,11 @@ import net.tracen.umapyoi.UmapyoiConfig;
 import net.tracen.umapyoi.api.UmapyoiAPI;
 import net.tracen.umapyoi.client.model.UmaCostumeModelUtils;
 import net.tracen.umapyoi.client.model.UmaPlayerModel;
+import net.tracen.umapyoi.data.tag.UmapyoiCostumeDataTags;
 import net.tracen.umapyoi.data.tag.UmapyoiItemTags;
 import net.tracen.umapyoi.events.client.RenderingUmaSoulEvent;
+import net.tracen.umapyoi.item.UmaCostumeItem;
+import net.tracen.umapyoi.registry.cosmetics.CosmeticData;
 import net.tracen.umapyoi.utils.ClientUtils;
 import net.tracen.umapyoi.utils.UmaSoulUtils;
 
@@ -42,19 +46,36 @@ public class ClientEvents {
     public static void preUmaSoulRendering(RenderingUmaSoulEvent.Pre event) {
         LivingEntity entity = event.getWearer();
         var model = event.getModel();
-
+        boolean hideHair = false;
         if (UmapyoiAPI.isUmaSuitRendering(entity)) {
             model.setAllVisible(false);
             model.head.visible = true;
             model.tail.visible = true;
-            if(UmapyoiAPI.isUmaSuitHasHat(entity)) 
+            if(UmapyoiAPI.isUmaSuitHasHat(entity)) {
+        		ResourceLocation loc = UmaCostumeItem.getCostumeID(UmapyoiAPI.getUmaSuit(entity));
+        		var costumeData = ClientUtils.getClientCosmeticDataRegistry().getHolder(
+        				ResourceKey.create(CosmeticData.REGISTRY_KEY, loc)
+        		);
+        		if(costumeData.get().is(UmapyoiCostumeDataTags.HAT_HIDEHAIR)) {
+        			hideHair = true;
+        			model.longHairParts.forEach(part -> part.visible = false);
+            	}else {
+            		model.longHairParts.forEach(part -> part.visible = true);
+            	}
             	model.hideHat();
-            else
+            }
+            else {
             	model.showHat();
-            
+            	
+            }
         } else {
             model.setAllVisible(true);
         }
+		if(hideHair) {
+			model.longHairParts.forEach(part -> part.visible = false);
+    	}else {
+    		model.longHairParts.forEach(part -> part.visible = true);
+    	}
         model.showEars();
     }
     

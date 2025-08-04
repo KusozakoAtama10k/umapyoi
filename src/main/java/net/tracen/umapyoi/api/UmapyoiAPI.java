@@ -10,7 +10,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.MinecraftForge;
 import net.tracen.umapyoi.client.renderer.AbstractSuitRenderer;
+import net.tracen.umapyoi.events.FindUmaSoulEvent;
 import net.tracen.umapyoi.item.UmaCostumeItem;
 import net.tracen.umapyoi.item.UmaSoulItem;
 import net.tracen.umapyoi.item.UmaSuitItem;
@@ -45,18 +47,28 @@ public class UmapyoiAPI {
         return ItemStack.EMPTY;
     }
     
-    public static ItemStack getUmaSoul(LivingEntity entity) {
+    public static ItemStack getUmaSoul(LivingEntity entity) {    	
+    	var preEvent = new FindUmaSoulEvent.Pre(entity);
+    	var result = ItemStack.EMPTY;
+    	
+    	if(MinecraftForge.EVENT_BUS.post(preEvent)) {
+    		result = preEvent.getUmaSoul();
+    		if(!result.isEmpty())
+    			return result;
+    	}
+    	
         if (CuriosApi.getCuriosInventory(entity).isPresent()) {
             var itemHandler = CuriosApi.getCuriosInventory(entity).orElse(null);
             if(itemHandler == null)
             	return ItemStack.EMPTY;
             if (itemHandler.getStacksHandler("uma_soul").isPresent()) {
                 var stacksHandler = itemHandler.getStacksHandler("uma_soul").orElse(null);
-                
-                return getFirstUmaSoul(stacksHandler.getStacks());
+                result = getFirstUmaSoul(stacksHandler.getStacks());
             }
         }
-        return ItemStack.EMPTY;
+        
+        var postEvent = new FindUmaSoulEvent.Post(entity, result);
+        return postEvent.getUmaSoul();
     }
     
     private static ItemStack getFirstUmaSoul(IDynamicStackHandler stackHandler) {
@@ -80,7 +92,7 @@ public class UmapyoiAPI {
                 if (stackHandler.getSlots() <= 0)
                     return ItemStack.EMPTY;
                 ItemStack stackInSlot = stackHandler.getStackInSlot(0);
-				if (stackInSlot.getItem() instanceof UmaSuitItem || stackInSlot.getItem() instanceof UmaCostumeItem ) {
+				if (stackInSlot.getItem() instanceof UmaSuitItem || stackInSlot.getItem() instanceof UmaCostumeItem) {
                     return stackInSlot;
                 }
             }

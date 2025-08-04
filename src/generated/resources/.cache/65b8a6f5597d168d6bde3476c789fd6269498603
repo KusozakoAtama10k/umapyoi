@@ -1,4 +1,4 @@
-// 1.20.1	2025-07-02T18:19:28.4213987	UmaData Registry
+// 1.20.1	2025-07-23T10:47:39.2105837	UmaData Registry
 bc61cfddfb38307c7beadbfd4fac08e961306e33 data/umapyoi/umapyoi/umadata/admire_vega.json
 88438b3e3a46d9cd4d3d1bbb333c4256d4ee76cd data/umapyoi/umapyoi/umadata/agnes_digital.json
 b50074724982f0fe6a3a3f26437532ca4a076ef1 data/umapyoi/umapyoi/umadata/agnus_tachyon.json
@@ -37,6 +37,7 @@ cac16ac59c8c563e728a1d57381957a9913a1559 data/umapyoi/umapyoi/umadata/grass_wond
 f3cecd68bb5a2b7720e2f0c4328cd8cf0854ac37 data/umapyoi/umapyoi/umadata/grass_wonder_umanet.json
 879628395296358e15f17e94bd73df3fc63ac971 data/umapyoi/umapyoi/umadata/happy_meek.json
 6840e2f971f109f520d5fd85484b31e5743cbc16 data/umapyoi/umapyoi/umadata/haru_urara.json
+428d244843e4ae3c252e7d6b960448fed0b0d32a data/umapyoi/umapyoi/umadata/hishi_akebono.json
 a41beae04209c1bfe7fc45868626a5437c4c075e data/umapyoi/umapyoi/umadata/hishi_miracle.json
 1b3271f3bf5b88daa04cd3afbaabc5138c8ad222 data/umapyoi/umapyoi/umadata/hokko_tarumae.json
 85c216c357cdeceda6785f2db3409981fbfca358 data/umapyoi/umapyoi/umadata/hokko_tarumae_swim.json
@@ -66,6 +67,7 @@ e60ae070d5b610faab7eedd44e747537f348e3d3 data/umapyoi/umapyoi/umadata/mejiro_mcq
 dbadeaf852b0ba7ecc5873f758baf171d79fe55d data/umapyoi/umapyoi/umadata/narita_top_road.json
 2d9a8c9b4e2f730567524b2252d30e387c54a625 data/umapyoi/umapyoi/umadata/neo_universe.json
 0fe229c635b97c5af8f34d08b0363aa1a99a0692 data/umapyoi/umapyoi/umadata/nice_nature.json
+5154e00777f026728c93c3696211216f6dd1db75 data/umapyoi/umapyoi/umadata/nice_nature_cheer.json
 2632d034ce75a84d4d445e2a9411fbe166864ff5 data/umapyoi/umapyoi/umadata/oguri_cap.json
 c7c4872b13274d6dbbbf5e17a79047140277f84a data/umapyoi/umapyoi/umadata/oguri_cap_xmas.json
 16fe9af0fdf534e7e0d2860c18b19878d2ac2ec7 data/umapyoi/umapyoi/umadata/rhein_kraft.json
@@ -77,6 +79,7 @@ ae579d51a2d63d16ba0098df4219477afec686e1 data/umapyoi/umapyoi/umadata/sakura_lau
 755d2ce8c833960be6011350a59d37bef52686e1 data/umapyoi/umapyoi/umadata/satono_diamond.json
 7a5b3f3f4cada14ae5ff84da94f2b7fbe587b0c8 data/umapyoi/umapyoi/umadata/satono_diamond_french.json
 911404108a57c09a7b4436ad6a6fe1c2b305593f data/umapyoi/umapyoi/umadata/seiun_sky.json
+5c519915e33a8bfd4ad078b44cbca5281da3b8f8 data/umapyoi/umapyoi/umadata/shenone_suzuna.json
 33e39893119a69edf780086fe012cda249b25939 data/umapyoi/umapyoi/umadata/silence_suzuka.json
 9ff4be64eee348cd11ea545639ddd6a1287148fc data/umapyoi/umapyoi/umadata/smart_falcon.json
 4936e3be9bd2fe91fe457de2fde4df1bacded862 data/umapyoi/umapyoi/umadata/special_week.json
