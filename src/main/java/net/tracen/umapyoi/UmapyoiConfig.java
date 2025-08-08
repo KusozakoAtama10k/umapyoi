@@ -33,6 +33,8 @@ public class UmapyoiConfig {
     public static ForgeConfigSpec.BooleanValue OVERLAY_SWITCH;
     public static ForgeConfigSpec.BooleanValue TOOLTIP_SWITCH;
     
+    public static ForgeConfigSpec.BooleanValue DISPLAY_SKILL_DETAIL;
+    
     public static ForgeConfigSpec.DoubleValue ACUPUNCTUIST_SUPPORT_CHANCE;
     
     public static ForgeConfigSpec.DoubleValue UMASOUL_MAX_SPEED;
@@ -136,6 +138,9 @@ public class UmapyoiConfig {
 
         TOOLTIP_SWITCH = CLIENT_BUILDER.comment("Deciding whether to omit details.")
                 .comment("After enabling, some details need to be pressed to display.").define("tooltip_switch", true);
+        
+        DISPLAY_SKILL_DETAIL = CLIENT_BUILDER.comment("Deciding whether to always display skill's details.")
+                .comment("After enabling, skill book will always display skill's details.").define("always_display_skill_details", false);
 
         HIDE_PARTS_RENDER = CLIENT_BUILDER
                 .comment("Determines whether to render model's hiden parts.",

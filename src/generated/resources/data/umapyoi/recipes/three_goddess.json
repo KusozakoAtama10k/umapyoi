@@ -7,14 +7,11 @@
     },
     "J": {
       "item": "umapyoi:jewel"
-    },
-    "L": {
-      "tag": "forge:storage_blocks/quartz"
     }
   },
   "pattern": [
     " J ",
-    "JLJ",
+    "JAJ",
     "AAA"
   ],
   "result": {

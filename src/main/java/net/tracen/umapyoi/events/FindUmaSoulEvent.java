@@ -22,7 +22,6 @@ public abstract class FindUmaSoulEvent extends UmaSoulEvent {
 		}
 	}
 
-	
 	public static class Post extends FindUmaSoulEvent{
 		public Post(LivingEntity entity, ItemStack stack) {
 			super(entity, stack);

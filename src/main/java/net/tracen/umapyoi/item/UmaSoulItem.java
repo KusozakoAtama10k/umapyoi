@@ -46,6 +46,11 @@ public class UmaSoulItem extends Item {
     }
     
     @Override
+    public String getCreatorModId(ItemStack itemStack) {
+    	return UmaSoulUtils.getName(itemStack).getNamespace();
+    }
+    
+    @Override
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
     	if(!stack.isEmpty() && stack.getItem() instanceof UmaSoulItem)
     		return new UmaSoulCapProvider(stack);
@@ -100,6 +105,7 @@ public class UmaSoulItem extends Item {
     public void appendHoverText(ItemStack stack, @Nullable Level worldIn, List<Component> tooltip, TooltipFlag flagIn) {
         super.appendHoverText(stack, worldIn, tooltip, flagIn);
         int ranking = ResultRankingUtils.getRanking(stack);
+        
         if(UmaSoulUtils.getGrowth(stack) == Growth.RETIRED)
             tooltip.add(Component.translatable("tooltip.umapyoi.uma_soul.ranking", UmaStatusUtils.getStatusLevel(ranking))
                             .withStyle(ChatFormatting.GOLD));

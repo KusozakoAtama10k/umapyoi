@@ -92,9 +92,9 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         add(ItemRegistry.CRYSTAL_GOLD.get(), "Golden Umamusume Crystal");
         add(ItemRegistry.CRYSTAL_RAINBOW.get(), "Rainbow Umamusume Crystal");
         
-        add(ItemRegistry.HORSESHOE_SILVER.get(), "Silver Horseshoe Crystal");
-        add(ItemRegistry.HORSESHOE_GOLD.get(), "Golden Horseshoe Crystal");
-        add(ItemRegistry.HORSESHOE_RAINBOW.get(), "Rainbow Horseshoe Crystal");
+        add(ItemRegistry.HORSESHOE_SILVER.get(), "Silver Cleats");
+        add(ItemRegistry.HORSESHOE_GOLD.get(), "Golden Cleats");
+        add(ItemRegistry.HORSESHOE_RAINBOW.get(), "Rainbow Cleats");
         
         add(ItemRegistry.NAGINATA.get(), "Naginata");
         add(ItemRegistry.BASEBALL_BAT.get(), "Metal Baseball Bat");
@@ -212,6 +212,37 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
         
         addSkill(UmaSkillRegistry.TETHER, "Tether");
         addSkill(UmaSkillRegistry.DOMINATOR, "Dominator");
+        
+        addSkillDetail(UmaSkillRegistry.BASIC_PACE, "Slightly increase speed.");
+        addSkillDetail(UmaSkillRegistry.LAST_LEG, "Slightly increase speed and power.");
+        addSkillDetail(UmaSkillRegistry.HEART_AND_SOUL, "Increase speed and power.");
+        addSkillDetail(UmaSkillRegistry.DEEP_BREATHS, "Slightly recover health.");
+        addSkillDetail(UmaSkillRegistry.COOLDOWN, "Recover health.");
+        addSkillDetail(UmaSkillRegistry.SERENE, "Slightly recover health and remove panicking.");
+        
+        addSkillDetail(UmaSkillRegistry.STEEL_WILL, "Increase resistance, boost mood and remove panicking.");
+        addSkillDetail(UmaSkillRegistry.BIG_EATER, "Recover endurance and increase health");
+        addSkillDetail(UmaSkillRegistry.NUTRITIONAL_SUPPLEMENTS, "Slightly recover endurance and increase health");
+        
+        addSkillDetail(UmaSkillRegistry.LOW_HEALTH_BUFF, "Slightly increase speed and power, increase more during low health.");
+        addSkillDetail(UmaSkillRegistry.ADV_LOWHEALTH_BUFF, "Increase speed and power, increase more during low health.");
+        addSkillDetail(UmaSkillRegistry.LOW_HEALTH_HEAL, "Slightly recover health, recover more during low health.");
+        addSkillDetail(UmaSkillRegistry.ADV_LOWHEALTH_HEAL, "Recover health, recover more during low health.");
+        
+        addSkillDetail(UmaSkillRegistry.MOUNTAIN_CLIMBER, "Increase the step height.");
+        addSkillDetail(UmaSkillRegistry.DIG_SPEED, "Increase the digging speed.");
+        addSkillDetail(UmaSkillRegistry.TURF_RUNNER, "Increase speed on turf blocks.");
+        addSkillDetail(UmaSkillRegistry.DIRT_RUNNER, "Increase speed on dirt blocks.");
+        addSkillDetail(UmaSkillRegistry.SNOW_RUNNER, "Increase speed on snow blocks.");
+        
+        addSkillDetail(UmaSkillRegistry.RAPID, "Slightly increase speed and recover endurance.");
+        addSkillDetail(UmaSkillRegistry.DIVINE_SPEED, "Increase speed and recover endurance.");
+        addSkillDetail(UmaSkillRegistry.TOP_UMAMUSUME, "Increase speed and power, boost mood.");
+        
+        addSkillDetail(UmaSkillRegistry.INQUISITIVE_MIND, "Increase the attack speed, increase more when has higher wit.");
+        
+        addSkillDetail(UmaSkillRegistry.TETHER, "Slightly lower the speed of other entities.");
+        addSkillDetail(UmaSkillRegistry.DOMINATOR, "Lower the speed of other entities.");
 
         add("container.umapyoi.three_goddess", "Three Goddesses Statue");
         add("container.umapyoi.training_facility", "Training Terminal");
@@ -549,6 +580,10 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
     private void addSkill(Supplier<UmaSkill> key, String name) {
         addSkill(key.get(), name);
     }
+    
+    private void addSkillDetail(Supplier<UmaSkill> key, String name) {
+    	addSkillDetail(key.get(), name);
+    }
 
     private void addFactor(Supplier<UmaFactor> key, String name) {
         addFactor(key.get(), name);
@@ -560,6 +595,10 @@ public class UmapyoiLangProvider extends AbstractLangProvider {
 
     private void addSkill(UmaSkill key, String name) {
         add(key.getDescriptionId(), name);
+    }
+    
+    private void addSkillDetail(UmaSkill key, String name) {
+        add(key.getDetailDescriptionId(), name);
     }
 
     private void addFactor(UmaFactor key, String name) {

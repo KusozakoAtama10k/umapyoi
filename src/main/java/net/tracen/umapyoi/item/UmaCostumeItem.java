@@ -30,6 +30,11 @@ public class UmaCostumeItem extends Item {
     public ICapabilityProvider initCapabilities(ItemStack stack, CompoundTag nbt) {
         return new UmaSuitCapProvider(stack, nbt);
     }
+    
+    @Override
+    public String getCreatorModId(ItemStack itemStack) {
+    	return getCostumeID(itemStack).getNamespace();
+    }
 
     @Override
     public String getDescriptionId(ItemStack pStack) {

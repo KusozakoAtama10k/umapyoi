@@ -34,8 +34,12 @@ public class UmaSoulCuriosWrapper implements ICurio {
     
     @Override
     public boolean canEquip(SlotContext slotContext) {
-    	return CuriosApi.getEntitySlots(slotContext.entity().getType()).containsKey("uma_soul") 
-    			&& slotContext.identifier().equals("uma_soul");
+    	return slotContext.identifier().equals("uma_soul");
+    }
+    
+    @Override
+    public boolean canEquipFromUse(SlotContext slotContext) {
+    	return slotContext.identifier().equals("uma_soul");
     }
 
     @Override

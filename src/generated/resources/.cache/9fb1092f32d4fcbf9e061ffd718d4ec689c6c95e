@@ -1,4 +1,4 @@
-// 1.20.1	2025-01-28T03:58:03.843414	Recipes
+// 1.20.1	2025-08-08T02:56:42.1409246	Recipes
 b4ab59ad2d4d282adcf9049b8ab8514bd7d5c0c7 data/umapyoi/advancements/recipes/combat/baseball_bat.json
 524581bdb50f71aecc5e95ddf2d1d442b02a8b40 data/umapyoi/advancements/recipes/combat/naginata.json
 0a24939c82d7769035c051f47712647f493ec3ff data/umapyoi/advancements/recipes/combat/summer_uniform.json
@@ -53,7 +53,7 @@ bab3c7a7ba1034b70e20d70bcc69cb0bb967e825 data/umapyoi/recipes/sr_uma_ticket.json
 d92bb172735e5a37ff327dafc2e155b9f029d45d data/umapyoi/recipes/summer_uniform.json
 32f3bc15c3d5f1f8de2a1db5dfa4290f7db6ac2c data/umapyoi/recipes/sweet_cupcake.json
 ca265b42a9dafc2d99db25e406f3a58928382ad0 data/umapyoi/recipes/swimsuit.json
-aafebbd0b8f2338ecb60a62980bcd3d11aa4fc2b data/umapyoi/recipes/three_goddess.json
+d71af5bc0a47e1efd5f0d5d9e1231beada66f2d2 data/umapyoi/recipes/three_goddess.json
 b991d63509dc48ede9caaf1273fdc791baa4cbbd data/umapyoi/recipes/training_facility.json
 066f3c061acbcf2c5e919b4ecc77aa796db480fa data/umapyoi/recipes/trainning_suit.json
 6211e0039ac51c2fcf9ec261b1dd44b4b3c01da6 data/umapyoi/recipes/uma_pedestal.json

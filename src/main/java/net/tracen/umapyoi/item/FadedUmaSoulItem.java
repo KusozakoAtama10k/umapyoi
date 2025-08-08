@@ -35,6 +35,9 @@ public class FadedUmaSoulItem extends Item {
                 .orElse(UmaData.DEFAULT_UMA_ID);
     }
     
-    
+    @Override
+    public String getCreatorModId(ItemStack itemStack) {
+    	return getUmaName(itemStack).getNamespace();
+    }
 
 }

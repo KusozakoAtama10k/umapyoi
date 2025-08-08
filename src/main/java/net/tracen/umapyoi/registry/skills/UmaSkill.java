@@ -51,13 +51,14 @@ public class UmaSkill{
         return actionPoint;
     }
 
+    public String toString() {
+        return UmaSkillRegistry.REGISTRY.get().getKey(this).toString();
+    }
+    
     public Component getDescription() {
         return Component.translatable(this.getDescriptionId());
     }
 
-    public String toString() {
-        return UmaSkillRegistry.REGISTRY.get().getKey(this).toString();
-    }
 
     protected String getOrCreateDescriptionId() {
         if (this.descriptionId == null) {
@@ -68,6 +69,18 @@ public class UmaSkill{
 
     public String getDescriptionId() {
         return this.getOrCreateDescriptionId();
+    }
+    
+    public Component getDescriptionDetail() {
+        return Component.translatable(this.getDetailDescriptionId());
+    }
+
+    protected String getOrCreateDescriptionDetail() {
+        return this.getDescriptionId()+".desc";
+    }
+
+    public String getDetailDescriptionId() {
+        return this.getOrCreateDescriptionDetail();
     }
 
     public void applySkill(Level level, LivingEntity user) {

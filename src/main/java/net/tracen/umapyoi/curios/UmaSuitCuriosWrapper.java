@@ -2,7 +2,6 @@ package net.tracen.umapyoi.curios;
 
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ItemStack;
-import top.theillusivec4.curios.api.CuriosApi;
 import top.theillusivec4.curios.api.SlotContext;
 import top.theillusivec4.curios.api.type.capability.ICurio;
 
@@ -20,8 +19,12 @@ public class UmaSuitCuriosWrapper implements ICurio {
 
     @Override
     public boolean canEquip(SlotContext slotContext) {
-    	return CuriosApi.getEntitySlots(slotContext.entity().getType()).containsKey("uma_suit") 
-    			&& slotContext.identifier().equals("uma_suit");
+    	return slotContext.identifier().equals("uma_suit");
+    }
+    
+    @Override
+    public boolean canEquipFromUse(SlotContext slotContext) {
+    	return slotContext.identifier().equals("uma_suit");
     }
 
     @Override
